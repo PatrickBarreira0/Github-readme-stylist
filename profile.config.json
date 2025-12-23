@@ -1,0 +1,21 @@
+{
+  "username": "PatrickBarreira0",
+  "sections": {
+    "ascii": {
+      "enabled": true,
+      "text": "Tick",
+      "font": "Graffiti"
+    },
+    "stats": {
+      "enabled": true,
+      "showCommits": true,
+      "showStars": true,
+      "showFollowers": true
+    },
+    "languages": {
+      "enabled": true,
+      "topN": 3
+    }
+  }
+}
+
