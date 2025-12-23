@@ -23,7 +23,7 @@ export const asciiSection: Section = {
             const fontData = fs.readFileSync(customFontPath, 'utf8');
             figlet.parseFont(font, fontData);
         }
-        
+
         const art = renderAscii(text, font);
         return `\`\`\`text\n${art}\n\`\`\``;
     },

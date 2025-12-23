@@ -1,18 +1,32 @@
 <!-- START_SECTION:ascii -->
 ```text
-___________.__        __    
-\__    ___/|__| ____ |  | __
-  |    |   |  |/ ___\|  |/ /
-  |    |   |  \  \___|    < 
-  |____|   |__|\___  >__|_ \
-                   \/     \/
+                                                                             
+                                                                             
+                                                   .     .,;.                
+        ..';:cox        ..,:.                    'col'   ':dx;     ',.       
+.....';:loll;,... .;;;:cll;.             .......,dxd,    lodx:    'd.        
+lddolc:cdxxo'    'odooxxl.            .,col;,cdddxxc.    .cxo. 'lxd,         
+';.'   ;dxxo'     .. 'dkd.           'oxd;.  .cxxxd'      .lxc:dxxo:;,'.     
+       ;ddxo.        .lxx;          'oxo'     'dxx:        'oxxxdl;'..'ll.   
+        .:xxl.        ;xxl.         .oxx;      ,dxx;        ,dxo'     .ck:.  
+         .cxxc.       .oxd'         :xxd'      cxxd'         ;dd'     .lkc.  
+          .oxx;       .lxx:         dxxo.      .;;'           ;xo.    .ok:   
+           ;xxo.       ;xxl.        dxxd'                   .,.cxl.   ,dx;   
+           .oxx;       'dxd'  ....'''oxx:                 .cx  'dx;   ;xd'   
+           .cxxl.      .cxxocloooddx.lxd:.             .;oxl'   :ko.  ;xo.   
+            cxxo.......,:lc;,'...... .;oxo,.        .'coo:'     ,xd,  ;xl.   
+           .lxxo.xxdolc;'.             .':ll:;;;;;,:c:;.''      'oo'  ,xo.   
+           .;cl; ,''..                     .........             ..   .ld'.,.
+                                                                       'oc.  
+                                                                        .;.  
+                                                                             
 ```
 <!-- END_SECTION:ascii -->
 
 <!-- START_SECTION:stats -->
 ```text
 +---------------+
-| Commits | 159 |
+| Commits | 162 |
 | Stars   | 1   |
 | Followers | 2 |
 +---------------+
@@ -22,9 +36,9 @@ ___________.__        __
 <!-- START_SECTION:languages -->
 ```text
 +------------------------------------------+
-| TypeScript [████████████████░░░░]  77.9% |
-| Python     [█░░░░░░░░░░░░░░░░░░░]   6.9% |
-| JavaScript [█░░░░░░░░░░░░░░░░░░░]   6.2% |
+| TypeScript [████████████████░░░░]  78.8% |
+| Python     [█░░░░░░░░░░░░░░░░░░░]   6.6% |
+| JavaScript [█░░░░░░░░░░░░░░░░░░░]   5.9% |
 +------------------------------------------+
 ```
 <!-- END_SECTION:languages -->
