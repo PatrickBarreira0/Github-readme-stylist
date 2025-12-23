@@ -1,4 +1,6 @@
 import figlet from 'figlet';
+import fs from 'fs';
+import path from 'path';
 import type { Section } from './types.js';
 import type { GitHubData } from '../fetcher.js';
 import type { Config } from '../config.js';
@@ -15,6 +17,13 @@ export const asciiSection: Section = {
     id: 'ascii',
     render(_data: GitHubData, config: Config): string {
         const { text, font } = config.sections.ascii;
+
+        const customFontPath = path.resolve(process.cwd(), 'assets', 'fonts', `${font}.flf`);
+        if (fs.existsSync(customFontPath)) {
+            const fontData = fs.readFileSync(customFontPath, 'utf8');
+            figlet.parseFont(font, fontData);
+        }
+        
         const art = renderAscii(text, font);
         return `\`\`\`text\n${art}\n\`\`\``;
     },
