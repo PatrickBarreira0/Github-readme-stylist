@@ -3,7 +3,7 @@
   "sections": {
     "ascii": {
       "enabled": true,
-      "text": "TICK",
+      "text": "tick",
       "font": "gangshit1"
     },
     "stats": {
