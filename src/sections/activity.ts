@@ -24,7 +24,7 @@ export const activitySection: Section = {
         const now = new Date();
         const lastUpdated = now.toISOString().replace('T', ' ').slice(0, 19);
 
-        return `### Activity\n\n\`\`\`text\n${border}\n${lines.join('\n')}\n${border}\n\nLast updated: ${lastUpdated}\n\`\`\``;
+        return `#### Activity\n\n\`\`\`text\n${border}\n${lines.join('\n')}\n${border}\n\nLast updated: ${lastUpdated}\n\`\`\``;
     },
 };
 

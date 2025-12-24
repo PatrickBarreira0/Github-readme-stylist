@@ -29,7 +29,7 @@ export const languagesSection: Section = {
         const border = '+' + '-'.repeat(maxLen + 2) + '+';
         const formatted = lines.map(l => `| ${l.padEnd(maxLen)} |`).join('\n');
 
-        return `### Languages\n\n\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
+        return `#### Languages\n\n\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
     },
 };
 
