@@ -5,7 +5,7 @@ import type { Config } from '../config.js';
 function createBar(percentage: number, width: number = 20): string {
     const filled = Math.round((percentage / 100) * width);
     const empty = width - filled;
-    return '█'.repeat(filled) + '░'.repeat(empty);
+    return '█'.repeat(filled) + '─'.repeat(empty);
 }
 
 export const languagesSection: Section = {
@@ -29,7 +29,7 @@ export const languagesSection: Section = {
         const border = '+' + '-'.repeat(maxLen + 2) + '+';
         const formatted = lines.map(l => `| ${l.padEnd(maxLen)} |`).join('\n');
 
-        return `\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
+        return `### Languages\n\n\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
     },
 };
 

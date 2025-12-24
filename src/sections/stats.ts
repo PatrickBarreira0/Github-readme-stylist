@@ -26,7 +26,7 @@ export const statsSection: Section = {
         const border = '+' + '-'.repeat(maxLen + 2) + '+';
         const formatted = lines.map(l => `| ${l.padEnd(maxLen)} |`).join('\n');
 
-        return `\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
+        return `### Stats\n\n\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
     },
 };
 

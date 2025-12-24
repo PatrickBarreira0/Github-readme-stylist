@@ -14,7 +14,11 @@
     },
     "languages": {
       "enabled": true,
-      "topN": 3
+      "topN": 5
+    },
+    "activity": {
+      "enabled": true,
+      "limit": 5
     }
   }
 }
