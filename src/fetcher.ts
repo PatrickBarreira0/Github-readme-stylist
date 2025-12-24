@@ -10,12 +10,19 @@ export interface LanguageStat {
     percentage: number;
 }
 
+export interface GitHubEvent {
+    type: string;
+    repo: string;
+    date: string;
+}
+
 export interface GitHubData {
     name: string;
     totalCommits: number;
     totalStars: number;
     followers: number;
     topLanguages: LanguageStat[];
+    recentEvents: GitHubEvent[];
 }
 
 interface LanguageEdge {
@@ -92,11 +99,27 @@ export async function fetchGitHubData(username: string): Promise<GitHubData> {
             percentage: totalSize > 0 ? (size / totalSize) * 100 : 0,
         }));
 
+    const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public`, {
+        headers: {
+            authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        },
+    });
+
+    const eventsData = await eventsResponse.json() as any[];
+    const recentEvents: GitHubEvent[] = (eventsData || [])
+        .slice(0, 10)
+        .map(event => ({
+            type: event.type.replace('Event', ''),
+            repo: event.repo.name,
+            date: event.created_at,
+        }));
+
     return {
         name: data.user.name,
         totalCommits: data.user.contributionsCollection.totalCommitContributions,
         totalStars,
         followers: data.user.followers.totalCount,
         topLanguages,
+        recentEvents,
     };
 }

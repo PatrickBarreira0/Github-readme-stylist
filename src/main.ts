@@ -4,9 +4,10 @@ import { fetchGitHubData } from './fetcher.js';
 import { asciiSection } from './sections/asci.js';
 import { statsSection } from './sections/stats.js';
 import { languagesSection } from './sections/languages.js';
+import { activitySection } from './sections/activity.js';
 import type { Section } from './sections/types.js';
 
-const sections: Section[] = [asciiSection, statsSection, languagesSection];
+const sections: Section[] = [asciiSection, statsSection, languagesSection, activitySection];
 
 function injectSection(content: string, sectionId: string, rendered: string): string {
     const regex = new RegExp(

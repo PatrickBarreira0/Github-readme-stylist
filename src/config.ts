@@ -19,10 +19,16 @@ export interface LanguagesConfig {
     topN: number;
 }
 
+export interface ActivityConfig {
+    enabled: boolean;
+    limit: number;
+}
+
 export interface SectionsConfig {
     ascii: AsciiConfig;
     stats: StatsConfig;
     languages: LanguagesConfig;
+    activity: ActivityConfig;
 }
 
 export interface Config {
