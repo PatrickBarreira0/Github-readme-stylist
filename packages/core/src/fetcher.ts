@@ -44,10 +44,16 @@ interface GraphQLResponse {
     };
 }
 
-export async function fetchGitHubData(username: string): Promise<GitHubData> {
+export async function fetchGitHubData(username: string, token?: string): Promise<GitHubData> {
+    const ghToken = token || process.env.GITHUB_TOKEN;
+    
+    if (!ghToken) {
+        throw new Error('GitHub Token is required. Please provide it via argument or GITHUB_TOKEN environment variable.');
+    }
+
     const graphQLClient = new GraphQLClient(endpoint, {
         headers: {
-            authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+            authorization: `Bearer ${ghToken}`,
         },
     });
 
@@ -101,7 +107,7 @@ export async function fetchGitHubData(username: string): Promise<GitHubData> {
 
     const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public`, {
         headers: {
-            authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+            authorization: `Bearer ${ghToken}`,
         },
     });
 
@@ -123,4 +129,3 @@ export async function fetchGitHubData(username: string): Promise<GitHubData> {
         recentEvents,
     };
 }
-

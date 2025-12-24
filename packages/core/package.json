@@ -2,7 +2,11 @@
   "name": "@github-readme-stylist/core",
   "version": "1.0.0",
   "description": "Core logic for GitHub README stylist",
-  "main": "src/main.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "type": "module",
   "scripts": {
     "dev": "tsx src/main.ts",
@@ -21,4 +25,3 @@
     "typescript": "^5.9.3"
   }
 }
-

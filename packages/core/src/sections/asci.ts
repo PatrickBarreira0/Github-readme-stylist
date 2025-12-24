@@ -32,28 +32,39 @@ function hasInk(fontName: string, charCode: number): boolean {
     });
 }
 
+export function loadCustomFont(font: string, fontsDir: string): boolean {
+    const customFontPath = path.resolve(fontsDir, `${font}.flf`);
+    if (fs.existsSync(customFontPath)) {
+        const fontData = fs.readFileSync(customFontPath, 'utf8');
+        figlet.parseFont(font, fontData);
+        return true;
+    }
+    return false;
+}
+
+export function processTextForFont(text: string, font: string): string {
+    const hasUpper = hasInk(font, 65);
+    const hasLower = hasInk(font, 97);
+
+    if (hasUpper && !hasLower) {
+        return text.toUpperCase();
+    } else if (hasLower && !hasUpper) {
+        return text.toLowerCase();
+    }
+    return text;
+}
+
 export const asciiSection: Section = {
     id: 'ascii',
     render(_data: GitHubData, config: Config): string {
         let { text, font } = config.sections.ascii;
 
-        const customFontPath = path.resolve(process.cwd(), 'assets', 'fonts', `${font}.flf`);
-        if (fs.existsSync(customFontPath)) {
-            const fontData = fs.readFileSync(customFontPath, 'utf8');
-            figlet.parseFont(font, fontData);
-
-            const hasUpper = hasInk(font, 65);
-            const hasLower = hasInk(font, 97);
-
-            if (hasUpper && !hasLower) {
-                text = text.toUpperCase();
-            } else if (hasLower && !hasUpper) {
-                text = text.toLowerCase();
-            }
+        const fontsDir = path.resolve(process.cwd(), 'assets', 'fonts');
+        if (loadCustomFont(font, fontsDir)) {
+             text = processTextForFont(text, font);
         }
 
         const art = renderAscii(text, font);
         return `\`\`\`text\n${art}\n\`\`\``;
     },
 };
-
