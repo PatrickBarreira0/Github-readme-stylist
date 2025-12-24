@@ -123,3 +123,4 @@ export async function fetchGitHubData(username: string): Promise<GitHubData> {
         recentEvents,
     };
 }
+

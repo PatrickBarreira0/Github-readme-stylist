@@ -42,8 +42,8 @@ export const asciiSection: Section = {
             const fontData = fs.readFileSync(customFontPath, 'utf8');
             figlet.parseFont(font, fontData);
 
-            const hasUpper = hasInk(font, 65); // 'A'
-            const hasLower = hasInk(font, 97); // 'a'
+            const hasUpper = hasInk(font, 65);
+            const hasLower = hasInk(font, 97);
 
             if (hasUpper && !hasLower) {
                 text = text.toUpperCase();

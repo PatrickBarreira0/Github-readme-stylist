@@ -1,0 +1,24 @@
+{
+  "name": "@github-readme-stylist/core",
+  "version": "1.0.0",
+  "description": "Core logic for GitHub README stylist",
+  "main": "src/main.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "debug": "tsx src/debug.ts"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "figlet": "^1.9.4",
+    "graphql": "^16.12.0",
+    "graphql-request": "^7.4.0"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.7.0",
+    "@types/node": "^25.0.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
+
