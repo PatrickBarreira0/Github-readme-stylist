@@ -239,9 +239,9 @@ export function ControlsPanel({
                 onChange={(e) => onStyleChange(e.target.value as StyleValue)}
                 className="w-full p-3 rounded-lg border bg-white dark:bg-black border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
               >
-                <option value="classic">Classic</option>
-                <option value="compact">Compact</option>
                 <option value="terminal">Terminal</option>
+                <option value="compact">Compact</option>
+                <option value="classic">Classic</option>
               </select>
             </div>
           </div>
