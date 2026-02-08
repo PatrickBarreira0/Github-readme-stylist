@@ -1,7 +1,7 @@
 'use server';
 
-import { renderAscii, loadCustomFont, processTextForFont, generateReadmeContent } from '@github-readme-stylist/core';
-import type { Config } from '@github-readme-stylist/core';
+import { renderAscii, loadCustomFont, processTextForFont, generateReadmeContent, renderReadmeFromData, fetchGitHubData } from '@github-readme-stylist/core';
+import type { Config, GitHubData } from '@github-readme-stylist/core';
 import path from 'path';
 import fs from 'fs';
 
@@ -57,21 +57,44 @@ export async function getFonts() {
   return Array.from(new Set([...standardFonts, ...customFonts])).sort();
 }
 
-export async function generateFullReadme(config: Config) {
+export async function fetchGitHubDataForUser(username: string) {
     try {
-        if (config.sections.ascii.enabled) {
-            const fontsDir = findFontsDir();
-            if (fontsDir) {
-                loadCustomFont(config.sections.ascii.font, fontsDir);
-                config.sections.ascii.text = processTextForFont(config.sections.ascii.text, config.sections.ascii.font);
-            }
-        }
-
         const token = process.env.GITHUB_TOKEN;
         if (!token) {
             throw new Error('GITHUB_TOKEN environment variable is not set on the server.');
         }
+        const data = await fetchGitHubData(username, token);
+        return { success: true, data };
+    } catch (error: any) {
+        console.error('Error fetching GitHub data:', error);
+        return { success: false, error: error.message || 'Unknown error occurred' };
+    }
+}
 
+export async function renderReadmeFromDataAction(config: Config, data: GitHubData) {
+    try {
+        const configCopy = structuredClone(config);
+        if (configCopy.sections.ascii.enabled) {
+            const fontsDir = findFontsDir();
+            if (fontsDir) {
+                loadCustomFont(configCopy.sections.ascii.font, fontsDir);
+                configCopy.sections.ascii.text = processTextForFont(configCopy.sections.ascii.text, configCopy.sections.ascii.font);
+            }
+        }
+        const content = renderReadmeFromData(data, configCopy);
+        return { success: true, content };
+    } catch (error: any) {
+        console.error('Error rendering README:', error);
+        return { success: false, error: error.message || 'Unknown error occurred' };
+    }
+}
+
+export async function generateFullReadme(config: Config) {
+    try {
+        const token = process.env.GITHUB_TOKEN;
+        if (!token) {
+            throw new Error('GITHUB_TOKEN environment variable is not set on the server.');
+        }
         const content = await generateReadmeContent(config, token);
         return { success: true, content };
     } catch (error: any) {

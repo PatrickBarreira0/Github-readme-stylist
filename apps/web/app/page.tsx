@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { generateAsciiArt, getFonts, generateFullReadme } from './actions';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { generateAsciiArt, getFonts, fetchGitHubDataForUser, renderReadmeFromDataAction } from './actions';
 import { Copy, Terminal, Type, Github, BarChart3, Code2, Activity, Settings, RefreshCw, Eye, EyeOff } from 'lucide-react';
-import type { Config } from '@github-readme-stylist/core';
+import type { Config, GitHubData } from '@github-readme-stylist/core';
 import ReactMarkdown from 'react-markdown'; // Import the renderer
 
 
@@ -47,6 +47,9 @@ export default function Home() {
   const [isAsciiLoading, setIsAsciiLoading] = useState(false);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const [gitHubData, setGitHubData] = useState<GitHubData | null>(null);
+  const [fetchedUsername, setFetchedUsername] = useState('');
+  const fullRenderId = useRef(0);
 
   useEffect(() => {
     getFonts().then(setFonts);
@@ -73,6 +76,35 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [updateAsciiPreview]);
 
+  useEffect(() => {
+    if (fetchedUsername && config.username !== fetchedUsername) {
+      setGitHubData(null);
+      setFullPreview('');
+    }
+  }, [config.username, fetchedUsername]);
+
+  useEffect(() => {
+    if (!gitHubData) return;
+    const timer = setTimeout(async () => {
+      const requestId = ++fullRenderId.current;
+      try {
+        const result = await renderReadmeFromDataAction(config, gitHubData);
+        if (requestId !== fullRenderId.current) return;
+        if (result.success && result.content) {
+          setFullPreview(result.content);
+          setError('');
+        } else {
+          setError(result.error || 'Failed to render README');
+        }
+      } catch (e: any) {
+        if (requestId === fullRenderId.current) {
+          setError(e.message);
+        }
+      }
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [config, gitHubData]);
+
   const handleGenerateFull = async () => {
     if (!config.username) {
         setError('GitHub Username is required');
@@ -81,11 +113,18 @@ export default function Home() {
     setError('');
     setIsGenerating(true);
     try {
-        const result = await generateFullReadme(config);
-        if (result.success && result.content) {
-            setFullPreview(result.content);
+        const dataResult = await fetchGitHubDataForUser(config.username);
+        if (!dataResult.success || !dataResult.data) {
+          setError(dataResult.error || 'Failed to fetch GitHub data');
+          return;
+        }
+        setGitHubData(dataResult.data);
+        setFetchedUsername(config.username);
+        const renderResult = await renderReadmeFromDataAction(config, dataResult.data);
+        if (renderResult.success && renderResult.content) {
+          setFullPreview(renderResult.content);
         } else {
-            setError(result.error || 'Failed to generate README');
+          setError(renderResult.error || 'Failed to render README');
         }
     } catch (e: any) {
         setError(e.message);

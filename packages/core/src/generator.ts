@@ -5,13 +5,11 @@ import { languagesSection } from './sections/languages.js';
 import { activitySection } from './sections/activity.js';
 import type { Section } from './sections/types.js';
 import type { Config } from './config.js';
+import type { GitHubData } from './fetcher.js';
 
 const sections: Section[] = [asciiSection, statsSection, languagesSection, activitySection];
 
-export async function generateReadmeContent(config: Config, token?: string): Promise<string> {
-    const data = await fetchGitHubData(config.username, token);
-    
-    // Default template structure
+export function renderReadmeFromData(data: GitHubData, config: Config): string {
     let content = sections
         .filter(s => config.sections[s.id as keyof typeof config.sections]?.enabled)
         .map(s => `<!-- START_SECTION:${s.id} -->\n<!-- END_SECTION:${s.id} -->`)
@@ -33,10 +31,14 @@ export async function generateReadmeContent(config: Config, token?: string): Pro
             }
         } catch (e) {
             console.error(`Error rendering section ${section.id}:`, e);
-            // Keep the placeholder or add error message in comment
         }
     }
 
     return content;
+}
+
+export async function generateReadmeContent(config: Config, token?: string): Promise<string> {
+    const data = await fetchGitHubData(config.username, token);
+    return renderReadmeFromData(data, config);
 }
 
