@@ -15,14 +15,14 @@ export function useAsciiPreview(asciiConfig: Config['sections']['ascii']) {
     }
     setIsAsciiLoading(true);
     try {
-      const art = await generateAsciiArt(asciiConfig.text, asciiConfig.font);
+      const art = await generateAsciiArt(asciiConfig.text, asciiConfig.font, asciiConfig.showCats);
       setAsciiPreview(art);
     } catch {
       setAsciiPreview('');
     } finally {
       setIsAsciiLoading(false);
     }
-  }, [asciiConfig.enabled, asciiConfig.font, asciiConfig.text]);
+  }, [asciiConfig.enabled, asciiConfig.font, asciiConfig.text, asciiConfig.showCats]);
 
   useEffect(() => {
     const timer = setTimeout(updateAsciiPreview, 500);

@@ -1,4 +1,5 @@
 export { renderAscii, loadCustomFont, processTextForFont, asciiSection } from './sections/asci.js';
+export { addCatsToAscii } from './ascii/cats.js';
 export { statsSection } from './sections/stats.js';
 export { languagesSection } from './sections/languages.js';
 export { activitySection } from './sections/activity.js';

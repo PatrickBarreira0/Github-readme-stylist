@@ -17,6 +17,7 @@ const initialConfig: Config = {
       enabled: true,
       text: 'Readme',
       font: 'Standard',
+      showCats: false,
     },
     stats: {
       enabled: true,

@@ -1,7 +1,7 @@
 'use client';
 
 import type { Config } from '@github-readme-stylist/core';
-import { Activity, BarChart3, Code2, Eye, EyeOff, Github, RefreshCw, Settings, Type } from 'lucide-react';
+import { Activity, BarChart3, Code2, Github, RefreshCw, Settings, Type } from 'lucide-react';
 
 export type TabId = 'general' | 'ascii' | 'stats' | 'languages' | 'activity';
 
@@ -30,6 +30,25 @@ const tabs: Array<{ id: TabId; icon: typeof Settings; label: string }> = [
   { id: 'languages', icon: Code2, label: 'Langs' },
   { id: 'activity', icon: Activity, label: 'Activity' },
 ];
+
+function Toggle({ checked, onChange }: { checked: boolean; onChange: (val: boolean) => void }) {
+  return (
+    <button
+      onClick={() => onChange(!checked)}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+        checked ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'
+      }`}
+      role="switch"
+      aria-checked={checked}
+    >
+      <span
+        className={`${
+          checked ? 'translate-x-6' : 'translate-x-1'
+        } inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200 ease-in-out`}
+      />
+    </button>
+  );
+}
 
 export function ControlsPanel({
   config,
@@ -81,14 +100,12 @@ export function ControlsPanel({
 
         {activeTab === 'ascii' && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
               <label className="text-sm font-semibold">Enable ASCII Section</label>
-              <button
-                onClick={() => onUpdateSection('ascii', 'enabled', !config.sections.ascii.enabled)}
-                className={`p-2 rounded-lg transition-colors ${config.sections.ascii.enabled ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-500'}`}
-              >
-                {config.sections.ascii.enabled ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-              </button>
+              <Toggle
+                checked={config.sections.ascii.enabled}
+                onChange={(val) => onUpdateSection('ascii', 'enabled', val)}
+              />
             </div>
             {config.sections.ascii.enabled && (
               <>
@@ -114,6 +131,13 @@ export function ControlsPanel({
                     ))}
                   </select>
                 </div>
+                <div className="flex items-center justify-between p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
+                  <label className="text-sm font-semibold">Show Cats</label>
+                  <Toggle
+                    checked={config.sections.ascii.showCats}
+                    onChange={(val) => onUpdateSection('ascii', 'showCats', val)}
+                  />
+                </div>
               </>
             )}
           </div>
@@ -121,14 +145,12 @@ export function ControlsPanel({
 
         {activeTab === 'stats' && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
               <label className="text-sm font-semibold">Enable Stats Section</label>
-              <button
-                onClick={() => onUpdateSection('stats', 'enabled', !config.sections.stats.enabled)}
-                className={`p-2 rounded-lg transition-colors ${config.sections.stats.enabled ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-500'}`}
-              >
-                {config.sections.stats.enabled ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-              </button>
+              <Toggle
+                checked={config.sections.stats.enabled}
+                onChange={(val) => onUpdateSection('stats', 'enabled', val)}
+              />
             </div>
             {config.sections.stats.enabled && (
               <div className="space-y-2">
@@ -155,14 +177,12 @@ export function ControlsPanel({
 
         {activeTab === 'languages' && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between mb-4">
-              <label className="text-sm font-semibold">Enable Languages Section (Python, C Java, etc.)</label>
-              <button
-                onClick={() => onUpdateSection('languages', 'enabled', !config.sections.languages.enabled)}
-                className={`p-2 rounded-lg transition-colors ${config.sections.languages.enabled ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-500'}`}
-              >
-                {config.sections.languages.enabled ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-              </button>
+            <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
+              <label className="text-sm font-semibold">Enable Languages Section</label>
+              <Toggle
+                checked={config.sections.languages.enabled}
+                onChange={(val) => onUpdateSection('languages', 'enabled', val)}
+              />
             </div>
             {config.sections.languages.enabled && (
               <div className="space-y-2">
@@ -182,14 +202,12 @@ export function ControlsPanel({
 
         {activeTab === 'activity' && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between mb-4">
-              <label className="text-sm font-semibold">Enable last commits section</label>
-              <button
-                onClick={() => onUpdateSection('activity', 'enabled', !config.sections.activity.enabled)}
-                className={`p-2 rounded-lg transition-colors ${config.sections.activity.enabled ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-500'}`}
-              >
-                {config.sections.activity.enabled ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-              </button>
+            <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
+              <label className="text-sm font-semibold">Enable Activity Section</label>
+              <Toggle
+                checked={config.sections.activity.enabled}
+                onChange={(val) => onUpdateSection('activity', 'enabled', val)}
+              />
             </div>
             {config.sections.activity.enabled && (
               <div className="space-y-2">
@@ -234,4 +252,3 @@ export function ControlsPanel({
     </div>
   );
 }
-

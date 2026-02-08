@@ -4,7 +4,8 @@
     "ascii": {
       "enabled": true,
       "text": "tick",
-      "font": "gangshit1"
+      "font": "gangshit1",
+      "showCats": false
     },
     "stats": {
       "enabled": true,

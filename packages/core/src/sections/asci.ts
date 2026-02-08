@@ -4,6 +4,7 @@ import path from 'path';
 import type { Section } from './types.js';
 import type { GitHubData } from '../fetcher.js';
 import type { Config } from '../config.js';
+import { addCatsToAscii } from '../ascii/cats.js';
 
 export function renderAscii(text: string, font: string = 'Standard'): string {
     const trimmed = text.trim();
@@ -117,6 +118,7 @@ export const asciiSection: Section = {
         }
 
         const art = renderAscii(text, font);
-        return `\`\`\`text\n${art}\n\`\`\``;
+        const output = config.sections.ascii.showCats ? addCatsToAscii(art) : art;
+        return `\`\`\`text\n${output}\n\`\`\``;
     },
 };

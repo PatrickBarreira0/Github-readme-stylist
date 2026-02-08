@@ -5,6 +5,7 @@ export interface AsciiConfig {
     enabled: boolean;
     text: string;
     font: string;
+    showCats: boolean;
 }
 
 export interface StatsConfig {

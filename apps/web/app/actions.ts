@@ -1,6 +1,6 @@
 'use server';
 
-import { renderAscii, loadCustomFont, processTextForFont, generateReadmeContent, renderReadmeFromData, fetchGitHubData } from '@github-readme-stylist/core';
+import { renderAscii, loadCustomFont, processTextForFont, generateReadmeContent, renderReadmeFromData, fetchGitHubData, addCatsToAscii } from '@github-readme-stylist/core';
 import type { Config, GitHubData } from '@github-readme-stylist/core';
 import path from 'path';
 import fs from 'fs';
@@ -20,16 +20,18 @@ function findFontsDir() {
   return null;
 }
 
-export async function generateAsciiArt(text: string, font: string) {
+export async function generateAsciiArt(text: string, font: string, showCats: boolean) {
   if (!text) return '';
   try {
     const fontsDir = findFontsDir();
     if (fontsDir) {
         loadCustomFont(font, fontsDir);
         const processedText = processTextForFont(text, font);
-        return renderAscii(processedText, font);
+        const art = renderAscii(processedText, font);
+        return showCats ? addCatsToAscii(art) : art;
     }
-    return renderAscii(text, font);
+    const art = renderAscii(text, font);
+    return showCats ? addCatsToAscii(art) : art;
   } catch (e) {
     console.error('Error generating ASCII art:', e);
     return 'Error generating ASCII art';
