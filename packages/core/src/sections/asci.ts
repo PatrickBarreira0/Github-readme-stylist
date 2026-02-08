@@ -32,10 +32,62 @@ function hasInk(fontName: string, charCode: number): boolean {
     });
 }
 
+    // Helper to patch 0-width space in FLF data
+    function patchFlfSpace(data: string): string {
+    if (data.charCodeAt(0) === 0xFEFF) {
+        data = data.slice(1);
+    }
+
+    const lines = data.split(/\r?\n/);
+    const header = lines[0];
+
+    if (!header || !header.startsWith('flf2a')) return data;
+
+    const hardblank = header.charAt(5); 
+    
+    const headerParts = header.split(' ');
+
+    const heightStr = headerParts[1] ?? '0';
+    const commentLinesStr = headerParts[5] ?? '0';
+
+    const height = parseInt(heightStr, 10);
+    const commentLines = parseInt(commentLinesStr, 10);
+    
+    if (isNaN(height) || isNaN(commentLines)) return data;
+
+    const spaceStartIndex = 1 + commentLines;
+
+    if (lines.length >= spaceStartIndex + height) {
+        let isEmpty = true;
+        for (let i = 0; i < height; i++) {
+            const line = lines[spaceStartIndex + i];
+           
+            if (!line || !/^@+$/.test(line)) {
+                isEmpty = false;
+                break;
+            }
+        }
+
+        if (isEmpty) {
+            const spacer = hardblank.repeat(4); 
+            for (let i = 0; i < height; i++) {
+                const line = lines[spaceStartIndex + i];
+                if (line !== undefined) {
+                    lines[spaceStartIndex + i] = spacer + line;
+                }
+            }
+            return lines.join('\n');
+        }
+    }
+    
+    return data;
+}
+
 export function loadCustomFont(font: string, fontsDir: string): boolean {
     const customFontPath = path.resolve(fontsDir, `${font}.flf`);
     if (fs.existsSync(customFontPath)) {
-        const fontData = fs.readFileSync(customFontPath, 'utf8');
+        let fontData = fs.readFileSync(customFontPath, 'utf8');
+        fontData = patchFlfSpace(fontData);
         figlet.parseFont(font, fontData);
         return true;
     }

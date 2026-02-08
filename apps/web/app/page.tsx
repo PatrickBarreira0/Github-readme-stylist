@@ -6,7 +6,6 @@ import { Copy, Terminal, Type, Github, BarChart3, Code2, Activity, Settings, Ref
 import type { Config } from '@github-readme-stylist/core';
 
 
-//TODO Fix preview ascii text compression
 //TODO Make ascii art dynamic after generation
 //TODO Change enabling/disabling button
 
@@ -125,7 +124,6 @@ export default function Home() {
             </div>
             <div>
                 <h1 className="text-2xl font-bold tracking-tight">GitHub Readme Stylist</h1>
-                <p className="text-gray-500 dark:text-gray-400">Create awesome personalized READMEs</p>
             </div>
           </div>
         </header>

@@ -6,3 +6,7 @@ export interface Section {
     render(data: GitHubData, config: Config): string;
 }
 
+
+
+
+
