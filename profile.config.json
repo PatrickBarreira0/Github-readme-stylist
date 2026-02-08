@@ -5,7 +5,7 @@
       "enabled": true,
       "text": "tick",
       "font": "gangshit1",
-      "showCats": false
+      "showCats": true
     },
     "stats": {
       "enabled": true,

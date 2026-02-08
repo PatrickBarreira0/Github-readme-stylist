@@ -8,7 +8,7 @@
     "apps/*"
   ],
   "scripts": {
-    "dev:core": "npm run dev --workspace=@github-readme-stylist/core",
+    "dev:core": "tsx packages/core/src/main.ts",
     "dev:web": "npm run dev --workspace=@github-readme-stylist/web",
     "build": "npm run build --workspaces --if-present"
   },

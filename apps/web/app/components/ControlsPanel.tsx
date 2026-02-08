@@ -132,7 +132,7 @@ export function ControlsPanel({
                   </select>
                 </div>
                 <div className="flex items-center justify-between p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
-                  <label className="text-sm font-semibold">Show Cats</label>
+                  <label className="text-sm font-semibold">Cats</label>
                   <Toggle
                     checked={config.sections.ascii.showCats}
                     onChange={(val) => onUpdateSection('ascii', 'showCats', val)}
