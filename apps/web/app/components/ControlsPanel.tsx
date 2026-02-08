@@ -1,15 +1,17 @@
 'use client';
 
 import type { Config } from '@github-readme-stylist/core';
-import { Activity, BarChart3, Code2, Github, RefreshCw, Settings, Type } from 'lucide-react';
+import { Activity, BarChart3, Code2, Github, Palette, RefreshCw, Settings, Type } from 'lucide-react';
 
-export type TabId = 'general' | 'ascii' | 'stats' | 'languages' | 'activity';
+export type TabId = 'general' | 'ascii' | 'stats' | 'languages' | 'activity' | 'style';
 
 export type UpdateSection = <S extends keyof Config['sections'], K extends keyof Config['sections'][S]>(
   section: S,
   key: K,
   value: Config['sections'][S][K],
 ) => void;
+
+type StyleValue = NonNullable<Config['style']>;
 
 type ControlsPanelProps = {
   config: Config;
@@ -18,6 +20,7 @@ type ControlsPanelProps = {
   onTabChange: (tab: TabId) => void;
   onUsernameChange: (value: string) => void;
   onUpdateSection: UpdateSection;
+  onStyleChange: (value: StyleValue) => void;
   onGenerate: () => void;
   isGenerating: boolean;
   error: string;
@@ -29,6 +32,7 @@ const tabs: Array<{ id: TabId; icon: typeof Settings; label: string }> = [
   { id: 'stats', icon: BarChart3, label: 'Stats' },
   { id: 'languages', icon: Code2, label: 'Langs' },
   { id: 'activity', icon: Activity, label: 'Activity' },
+  { id: 'style', icon: Palette, label: 'Style' },
 ];
 
 function Toggle({ checked, onChange }: { checked: boolean; onChange: (val: boolean) => void }) {
@@ -57,6 +61,7 @@ export function ControlsPanel({
   onTabChange,
   onUsernameChange,
   onUpdateSection,
+  onStyleChange,
   onGenerate,
   isGenerating,
   error,
@@ -68,7 +73,7 @@ export function ControlsPanel({
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
               activeTab === tab.id
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -222,6 +227,23 @@ export function ControlsPanel({
                 />
               </div>
             )}
+          </div>
+        )}
+
+        {activeTab === 'style' && (
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-sm font-semibold">README Style</label>
+              <select
+                value={config.style ?? 'terminal'}
+                onChange={(e) => onStyleChange(e.target.value as StyleValue)}
+                className="w-full p-3 rounded-lg border bg-white dark:bg-black border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+              >
+                <option value="classic">Classic</option>
+                <option value="compact">Compact</option>
+                <option value="terminal">Terminal</option>
+              </select>
+            </div>
           </div>
         )}
       </div>

@@ -12,6 +12,7 @@ import { useReadmePreview } from './hooks/useReadmePreview';
 
 const initialConfig: Config = {
   username: '',
+  style: 'terminal',
   sections: {
     ascii: {
       enabled: true,
@@ -62,6 +63,10 @@ export default function Home() {
     setConfig((prev) => ({ ...prev, username: value }));
   }, []);
 
+  const handleStyleChange = useCallback((value: NonNullable<Config['style']>) => {
+    setConfig((prev) => ({ ...prev, style: value }));
+  }, []);
+
   const handleCopy = useCallback(() => {
     copy(fullPreview || asciiPreview);
   }, [copy, fullPreview, asciiPreview]);
@@ -79,6 +84,7 @@ export default function Home() {
             onTabChange={setActiveTab}
             onUsernameChange={handleUsernameChange}
             onUpdateSection={updateSection}
+            onStyleChange={handleStyleChange}
             onGenerate={generateFull}
             isGenerating={isGenerating}
             error={error}

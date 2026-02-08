@@ -32,8 +32,11 @@ export interface SectionsConfig {
     activity: ActivityConfig;
 }
 
+export type ReadmeStyle = 'classic' | 'compact' | 'terminal';
+
 export interface Config {
     username: string;
+    style?: ReadmeStyle;
     sections: SectionsConfig;
 }
 
