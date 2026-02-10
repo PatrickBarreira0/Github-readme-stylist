@@ -17,7 +17,7 @@ const initialConfig: Config = {
   sections: {
     ascii: {
       enabled: true,
-      text: 'Readme',
+      text: 'Read me',
       font: 'Standard',
       showCats: false,
     },
@@ -78,7 +78,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-4 md:p-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-[1600px] mx-auto space-y-8">
         <Header />
 
         <main className="grid grid-cols-1 lg:grid-cols-12 gap-8">

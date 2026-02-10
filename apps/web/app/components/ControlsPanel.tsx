@@ -69,7 +69,7 @@ export function ControlsPanel({
   error,
 }: ControlsPanelProps) {
   return (
-    <div className="lg:col-span-5 space-y-6">
+    <div className="lg:col-span-4 space-y-6">
       <div className="flex space-x-1 overflow-x-auto pb-2">
         {tabs.map((tab) => (
           <button

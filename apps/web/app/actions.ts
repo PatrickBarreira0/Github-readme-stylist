@@ -52,7 +52,7 @@ export async function getFonts() {
   }
   
   const standardFonts = [
-    'Standard', 'Ghost', 'Graffiti', 'Slant', 'Big', 'Banner', 'Block', 'Bubble', 'Digital', 'Ivory', 'Mini', 'Script', 'Shadow', 'Small', 'Speed', 'Star Wars', 'Stop'
+    'Standard', 'Keyboard','Ghost', 'Graffiti', 'Slant', 'Big', 'Banner', 'Block', 'Bubble', 'Mini', 'Script', 'Shadow', 'Small', 'Speed', 'Star Wars', 'Avatar', 'Big Money-SE', 'BlurVision ASCII', 'Chiseled'
   ];
   
   // Return unique sorted fonts
