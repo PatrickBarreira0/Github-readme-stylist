@@ -23,22 +23,22 @@ lddolc:cdxxo'   'odooxxl.    .,col;,cdddxxc.    .cxo. 'lxd,
 Software Developer
 
                           ,                                          /\___/\
-  ,-.       _,---._ __  / \    ┌ Followers ┐  ┌ Stars ┐              )     (
- /  )    .-'       `./ /   \   │     2     │  │   1   │              =\   /=
-(  (   ,'            `/    /|  └───────────┘  └───────┘              )   (
- \  `-'             \'\   / |  ┌ Languages ──────────────────── ┐   /     \
-  `.              ,  \ \ /  |  │ TypeScript ██████████░░  82.3% │   )     (
-   /`.          ,'-`----Y   |  │ Python     █░░░░░░░░░░░   5.4% │  /       \
-  (            ;        |   '  │ JavaScript █░░░░░░░░░░░   5.1% │  \       /
-  |  ,-.    ,-'         |  /   │ CSS        ░░░░░░░░░░░░   2.5% │   \__ __/
-  |  | (   |            | /    │ C#         ░░░░░░░░░░░░   2.4% │      ))
-  )  |  \  `.___________|/     └────────────────────────────────┘      //
+  ,-.       _,---._ __  / \                                          )     (
+ /  )    .-'       `./ /   \                                         =\   /=
+(  (   ,'            `/    /|  ┌ Languages ──────────────────── ┐    )   (
+ \  `-'             \'\   / |  │ TypeScript ██████████░░  82.3% │   /     \
+  `.              ,  \ \ /  |  │ Python     █░░░░░░░░░░░   5.4% │   )     (
+   /`.          ,'-`----Y   |  │ JavaScript █░░░░░░░░░░░   5.1% │  /       \
+  (            ;        |   '  │ CSS        ░░░░░░░░░░░░   2.5% │  \       /
+  |  ,-.    ,-'         |  /   │ C#         ░░░░░░░░░░░░   2.4% │   \__ __/
+  |  | (   |            | /    └────────────────────────────────┘      ))
+  )  |  \  `.___________|/                                             //
   `--'   `--'                                                          ((
                                                                        \)
 
-┌ Activity ────────────────────────────────── ┐  ┌ Stats ──── ┐
-│ Push PatrickBarreira0/Github-readme-stylist │  │ Commits 90 │
-│ Push PatrickBarreira0/Github-readme-stylist │  └────────────┘
+┌ Activity ────────────────────────────────── ┐  ┌ Stats ───── ┐
+│ Push PatrickBarreira0/Github-readme-stylist │  │ Commits 212 │
+│ Push PatrickBarreira0/Github-readme-stylist │  └─────────────┘
 │ Push PatrickBarreira0/Github-readme-stylist │
 │ Push PatrickBarreira0/Github-readme-stylist │
 │ Push PatrickBarreira0/Github-readme-stylist │
