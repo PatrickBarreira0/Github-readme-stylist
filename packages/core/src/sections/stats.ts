@@ -29,8 +29,3 @@ export const statsSection: Section = {
         return `#### Stats\n\n\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
     },
 };
-
-
-
-
-

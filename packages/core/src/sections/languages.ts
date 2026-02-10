@@ -32,8 +32,3 @@ export const languagesSection: Section = {
         return `#### Languages\n\n\`\`\`text\n${border}\n${formatted}\n${border}\n\`\`\``;
     },
 };
-
-
-
-
-
