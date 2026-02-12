@@ -45,7 +45,7 @@ interface GraphQLResponse {
 }
 
 export async function fetchGitHubData(username: string, token?: string): Promise<GitHubData> {
-    const ghToken = token || process.env.GITHUB_TOKEN;
+    const ghToken = token || process.env.INPUT_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
     
     if (!ghToken) {
         throw new Error('GitHub Token is required. Please provide it via argument or GITHUB_TOKEN environment variable.');

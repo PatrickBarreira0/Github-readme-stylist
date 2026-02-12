@@ -95,19 +95,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
       - name: Generate README
-        run: npm run dev:core
-        env:
-          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+        uses: patrickbarreira0/github-readme-stylist@main
+        with:
+          config_path: 'profile.config.json'
 
       - name: Commit and Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
