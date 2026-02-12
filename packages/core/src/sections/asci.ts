@@ -82,21 +82,36 @@ export function processTextForFont(text: string, font: string): string {
     return text;
 }
 
+function getFontContent(fontName: string): string | undefined {
+
+    if (customFonts[fontName]) return customFonts[fontName];
+    if (bundledFonts[fontName]) return bundledFonts[fontName];
+
+    const lowerName = fontName.toLowerCase();
+    const foundKey = Object.keys(bundledFonts).find(key => key.toLowerCase() === lowerName);
+    
+    if (foundKey) {
+        return bundledFonts[foundKey];
+    }
+
+    return undefined;
+}
+
 export function renderAscii(text: string, font: string = 'Standard'): string {
     let textToRender = text.trim();
     if (!textToRender) {
         throw new Error('ASCII text cannot be empty');
     }
 
-    const fontContent = customFonts[font] || bundledFonts[font];
+    const fontContent = getFontContent(font);
 
     if (fontContent) {
         const patchedContent = patchFlfSpace(fontContent);
-        figlet.parseFont(font, patchedContent);
 
+        figlet.parseFont(font, patchedContent);
+        
         textToRender = processTextForFont(textToRender, font);
     } 
-
 
     return figlet.textSync(textToRender, { 
         font: font as any, 
