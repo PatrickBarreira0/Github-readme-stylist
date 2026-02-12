@@ -354,25 +354,23 @@ export function ControlsPanel({
         )}
       </div>
 
-      {activeTab === 'general' && (
-        <button
-          onClick={onGenerate}
-          disabled={isGenerating || !config.username}
-          className="w-full py-4 bg-white hover:bg-gray-50 text-black border border-gray-200 dark:border-gray-700 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed font-bold rounded-xl shadow-sm transition-all flex items-center justify-center gap-2"
-        >
-          {isGenerating ? (
-            <>
-              <RefreshCw className="w-5 h-5 animate-spin" />
-              {t('controls.generating')}
-            </>
-          ) : (
-            <>
-              <RefreshCw className="w-5 h-5" />
-              {t('controls.generate')}
-            </>
-          )}
-        </button>
-      )}
+      <button
+        onClick={onGenerate}
+        disabled={isGenerating || !config.username}
+        className="w-full py-4 bg-white hover:bg-gray-50 text-black border border-gray-200 dark:border-gray-700 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed font-bold rounded-xl shadow-sm transition-all flex items-center justify-center gap-2"
+      >
+        {isGenerating ? (
+          <>
+            <RefreshCw className="w-5 h-5 animate-spin" />
+            {t('controls.generating')}
+          </>
+        ) : (
+          <>
+            <RefreshCw className="w-5 h-5" />
+            {t('controls.generate')}
+          </>
+        )}
+      </button>
 
       {error && (
         <div className="p-4 bg-red-50 text-red-600 rounded-lg text-sm border border-red-100">
