@@ -9,7 +9,6 @@ const __dirname = path.dirname(__filename);
 
 const figletEntry = require.resolve('figlet');
 let figletRoot = path.dirname(figletEntry);
-
 let fontsDir = path.join(figletRoot, 'fonts');
 
 if (!fs.existsSync(fontsDir)) {
@@ -22,33 +21,35 @@ if (!fs.existsSync(fontsDir)) {
 }
 
 const outputDir = path.join(__dirname, '../src/ascii/generated');
-if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+
+if (fs.existsSync(outputDir)) {
+    fs.rmSync(outputDir, { recursive: true, force: true });
 }
+fs.mkdirSync(outputDir, { recursive: true });
 
 const files = fs.readdirSync(fontsDir).filter(f => f.endsWith('.flf'));
 
 const imports: string[] = [];
 const mapEntries: string[] = [];
 
-
 files.forEach((file, index) => {
     const fontName = file.replace('.flf', '');
-    const varName = `font_${index}`; 
+    const varName = `font_${index}`;
+    
+    const safeFileName = file.replace(/[^a-zA-Z0-9.-]/g, '_');
     
     const srcPath = path.join(fontsDir, file);
-    const destPath = path.join(outputDir, file);
+    const destPath = path.join(outputDir, safeFileName);
     
     fs.copyFileSync(srcPath, destPath);
 
-    imports.push(`import ${varName} from './${file}';`);
-    mapEntries.push(`  '${fontName}': ${varName},`);
+    const safeKey = fontName.replace(/'/g, "\\'");
+
+    imports.push(`import ${varName} from './${safeFileName}';`);
+    mapEntries.push(`  '${safeKey}': ${varName},`);
 });
 
-const content = `// This file is auto-generated. Do not edit.
-// It bundles all standard figlet fonts so they are available in Vercel/Serverless environments.
-
-${imports.join('\n')}
+const content = `${imports.join('\n')}
 
 export const bundledFonts: Record<string, string> = {
 ${mapEntries.join('\n')}
