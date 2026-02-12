@@ -19611,8 +19611,7 @@ var figlet = (() => {
 
 // ../../node_modules/figlet/dist/node-figlet.mjs
 var import_url = require("url");
-var import_meta = {};
-var __filename = (0, import_url.fileURLToPath)(import_meta.url);
+var __filename = (0, import_url.fileURLToPath)("file:///dist/index.cjs");
 var __dirname = path2.dirname(__filename);
 var fontPath = path2.join(__dirname, "/../fonts/");
 var nodeFiglet = figlet;

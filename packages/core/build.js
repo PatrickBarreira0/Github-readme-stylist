@@ -9,5 +9,8 @@ await esbuild.build({
   format: 'cjs',
   loader: {
     '.flf': 'text'
+  },
+  define: {
+    'import.meta.url': '"file:///dist/index.cjs"'
   }
 });
