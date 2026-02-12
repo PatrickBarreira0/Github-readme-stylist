@@ -1,0 +1,15 @@
+name: 'GitHub Readme Stylist'
+description: 'Generate a stylish README with ASCII art and statistics.'
+author: 'Tick'
+inputs:
+  github_token:
+    description: 'GitHub Token (GITHUB_TOKEN)'
+    required: true
+    default: ${{ github.token }}
+  config_path:
+    description: 'Path to the configuration file'
+    required: false
+    default: 'profile.config.json'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
