@@ -46,8 +46,3 @@ export function loadConfig(configPath?: string): Config {
     const raw = fs.readFileSync(resolvedPath, 'utf-8');
     return JSON.parse(raw) as Config;
 }
-
-
-
-
-

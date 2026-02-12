@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "tsx src/main.ts",
     "debug": "tsx src/debug.ts",
-    "build:action": "esbuild src/main.ts --bundle --platform=node --target=node20 --outfile=../../dist/index.js --loader:.flf=text"
+    "build:action": "esbuild src/main.ts --bundle --platform=node --target=node20 --outfile=../../dist/index.js --loader:.flf=text --format=esm"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
