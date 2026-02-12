@@ -1,9 +1,10 @@
 'use client';
 
 import type { Config } from '@github-readme-stylist/core';
-import { Activity, BarChart3, Code2, Github, Palette, RefreshCw, Settings, Type } from 'lucide-react';
+import { Activity, BarChart3, Code2, Copy, Github, Palette, RefreshCw, Settings, Type, Wrench } from 'lucide-react';
+import { useState } from 'react';
 
-export type TabId = 'general' | 'ascii' | 'stats' | 'languages' | 'activity' | 'style';
+export type TabId = 'general' | 'ascii' | 'stats' | 'languages' | 'activity' | 'style' | 'setup';
 
 export type UpdateSection = <S extends keyof Config['sections'], K extends keyof Config['sections'][S]>(
   section: S,
@@ -34,6 +35,7 @@ const tabs: Array<{ id: TabId; icon: typeof Settings; label: string }> = [
   { id: 'languages', icon: Code2, label: 'Langs' },
   { id: 'activity', icon: Activity, label: 'Activity' },
   { id: 'style', icon: Palette, label: 'Style' },
+  { id: 'setup', icon: Wrench, label: 'Setup' },
 ];
 
 function Toggle({ checked, onChange }: { checked: boolean; onChange: (val: boolean) => void }) {
@@ -55,6 +57,77 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (val: boole
   );
 }
 
+function CopyBlock({ title, content, language = 'json' }: { title: string; content: string; language?: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(content);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <label className="text-sm font-semibold">{title}</label>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium text-white-500 bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-md hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+        >
+          {copied ? 'Copied!' : 'Copy'}
+          <Copy className="w-3 h-3" />
+        </button>
+      </div>
+      <div className="relative group">
+        <pre className="p-4 rounded-lg bg-white dark:bg-black border border-gray-200 dark:border-gray-800 overflow-x-auto text-xs font-mono max-h-[200px] overflow-y-auto scrollbar-hide">
+          <code>{content}</code>
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+const WORKFLOW_YAML = `name: Update Profile README
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate README
+        run: npm run dev:core
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update Profile README"
+          file_pattern: README.md
+          branch: main
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>`;
+
 export function ControlsPanel({
   config,
   fonts,
@@ -70,12 +143,12 @@ export function ControlsPanel({
 }: ControlsPanelProps) {
   return (
     <div className="lg:col-span-4 space-y-6">
-      <div className="flex space-x-1 overflow-x-auto pb-2">
+      <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
+            className={`flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
               activeTab === tab.id
                 ? 'bg-black dark:bg-white text-white dark:text-black'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -254,6 +327,38 @@ export function ControlsPanel({
                 className="w-full p-3 rounded-lg border bg-white dark:bg-black border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
+          </div>
+        )}
+
+        {activeTab === 'setup' && (
+          <div className="space-y-6">
+            <div className="p-4 bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 rounded-lg">
+              <h3 className="text-sm font-bold mb-2">Option 1: Manual (Static)</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                Simply copy the generated Markdown from the preview panel and paste it into your repository with the same name as your github username as a
+                README.md
+                file.
+              </p>
+            </div>
+
+            <div className="p-4 bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900 rounded-lg">
+              <h3 className="text-sm font-bold text-blue-900 dark:text-blue-100 mb-2">
+                Option 2: Automatic (Daily Updates)
+              </h3>
+              <ol className="list-decimal list-inside text-sm text-blue-800 dark:text-blue-200 space-y-1">
+                <li>Create a repository with the same name as your github username.</li>
+                <li>
+                  Copy <code>profile.config.json</code> in the repository root with the content below.
+                </li>
+                <li>
+                  Copy <code>.github/workflows/update-readme.yml</code> and add it to the repository root.
+                </li>
+              </ol>
+            </div>
+
+            <CopyBlock title="1. profile.config.json" content={JSON.stringify(config, null, 2)} />
+
+            <CopyBlock title="2. .github/workflows/update-readme.yml" content={WORKFLOW_YAML} language="yaml" />
           </div>
         )}
       </div>
