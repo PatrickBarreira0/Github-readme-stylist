@@ -31,7 +31,7 @@ export const translations = {
       readmeStyle: 'README Style',
       generate: 'Generate README',
       generating: 'Generating Profile...',
-      placeholderUser: 'Enter your GitHub username',
+      placeholderUser: 'Enter your GitHub username and click on generate',
     },
     preview: {
       title: 'Preview',
@@ -79,7 +79,7 @@ export const translations = {
       readmeStyle: 'Estilo do README',
       generate: 'Gerar README',
       generating: 'Gerando Perfil...',
-      placeholderUser: 'Digite seu usuário do GitHub',
+      placeholderUser: 'Digite seu usuário do GitHub e clique em Gerar',
     },
     preview: {
       title: 'Pré-visualização',
