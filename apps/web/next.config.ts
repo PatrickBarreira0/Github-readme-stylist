@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   transpilePackages: ["@github-readme-stylist/core"],
+  
+  outputFileTracingRoot: path.join(__dirname, "../../"),
+  outputFileTracingIncludes: {
+    "/**/*": ["node_modules/figlet/fonts/*.flf"],
+  },
+
   webpack: (config) => {
     config.module.rules.push({
       test: /\.flf$/,
