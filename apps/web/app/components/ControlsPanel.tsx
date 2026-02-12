@@ -3,6 +3,7 @@
 import type { Config } from '@github-readme-stylist/core';
 import { Activity, BarChart3, Code2, Copy, Github, Palette, RefreshCw, Settings, Type, Wrench } from 'lucide-react';
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export type TabId = 'general' | 'ascii' | 'stats' | 'languages' | 'activity' | 'style' | 'setup';
 
@@ -27,16 +28,6 @@ type ControlsPanelProps = {
   isGenerating: boolean;
   error: string;
 };
-
-const tabs: Array<{ id: TabId; icon: typeof Settings; label: string }> = [
-  { id: 'general', icon: Settings, label: 'General' },
-  { id: 'ascii', icon: Type, label: 'ASCII' },
-  { id: 'stats', icon: BarChart3, label: 'Stats' },
-  { id: 'languages', icon: Code2, label: 'Langs' },
-  { id: 'activity', icon: Activity, label: 'Activity' },
-  { id: 'style', icon: Palette, label: 'Style' },
-  { id: 'setup', icon: Wrench, label: 'Setup' },
-];
 
 function Toggle({ checked, onChange }: { checked: boolean; onChange: (val: boolean) => void }) {
   return (
@@ -141,6 +132,18 @@ export function ControlsPanel({
   isGenerating,
   error,
 }: ControlsPanelProps) {
+  const { t } = useLanguage();
+
+  const tabs: Array<{ id: TabId; icon: typeof Settings; label: string }> = [
+    { id: 'general', icon: Settings, label: t('tabs.general') },
+    { id: 'ascii', icon: Type, label: t('tabs.ascii') },
+    { id: 'stats', icon: BarChart3, label: t('tabs.stats') },
+    { id: 'languages', icon: Code2, label: t('tabs.languages') },
+    { id: 'activity', icon: Activity, label: t('tabs.activity') },
+    { id: 'style', icon: Palette, label: t('tabs.style') },
+    { id: 'setup', icon: Wrench, label: t('tabs.setup') },
+  ];
+
   return (
     <div className="lg:col-span-4 space-y-6">
       <div className="flex gap-1 overflow-x-auto pb-2 scrollbar-hide">
@@ -165,14 +168,14 @@ export function ControlsPanel({
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-semibold flex items-center gap-2">
-                <Github className="w-4 h-4" /> GitHub Username
+                <Github className="w-4 h-4" /> {t('controls.username')}
               </label>
               <input
                 type="text"
                 value={config.username}
                 onChange={(e) => onUsernameChange(e.target.value)}
                 className="w-full p-3 rounded-lg border bg-white dark:bg-black border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
-                placeholder="Enter your GitHub username"
+                placeholder={t('controls.placeholderUser')}
               />
             </div>
           </div>
@@ -181,7 +184,7 @@ export function ControlsPanel({
         {activeTab === 'ascii' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
-              <label className="text-sm font-semibold">Enable ASCII Section</label>
+              <label className="text-sm font-semibold">{t('controls.enableAscii')}</label>
               <Toggle
                 checked={config.sections.ascii.enabled}
                 onChange={(val) => onUpdateSection('ascii', 'enabled', val)}
@@ -190,7 +193,7 @@ export function ControlsPanel({
             {config.sections.ascii.enabled && (
               <>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold">Text</label>
+                  <label className="text-sm font-semibold">{t('controls.text')}</label>
                   <textarea
                     value={config.sections.ascii.text}
                     onChange={(e) => onUpdateSection('ascii', 'text', e.target.value)}
@@ -198,7 +201,7 @@ export function ControlsPanel({
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold">Font</label>
+                  <label className="text-sm font-semibold">{t('controls.font')}</label>
                   <select
                     value={config.sections.ascii.font}
                     onChange={(e) => onUpdateSection('ascii', 'font', e.target.value)}
@@ -212,7 +215,7 @@ export function ControlsPanel({
                   </select>
                 </div>
                 <div className="flex items-center justify-between p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
-                  <label className="text-sm font-semibold">Cats</label>
+                  <label className="text-sm font-semibold">{t('controls.cats')}</label>
                   <Toggle
                     checked={config.sections.ascii.showCats}
                     onChange={(val) => onUpdateSection('ascii', 'showCats', val)}
@@ -226,7 +229,7 @@ export function ControlsPanel({
         {activeTab === 'stats' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
-              <label className="text-sm font-semibold">Enable Stats Section</label>
+              <label className="text-sm font-semibold">{t('controls.enableStats')}</label>
               <Toggle
                 checked={config.sections.stats.enabled}
                 onChange={(val) => onUpdateSection('stats', 'enabled', val)}
@@ -234,22 +237,18 @@ export function ControlsPanel({
             </div>
             {config.sections.stats.enabled && (
               <div className="space-y-2">
-                {(['showCommits', 'showStars', 'showFollowers'] as Array<keyof Config['sections']['stats']>).map(
-                  (key) => (
-                    <label
-                      key={key}
-                      className="flex items-center gap-3 p-3 bg-white dark:bg-black rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={config.sections.stats[key]}
-                        onChange={(e) => onUpdateSection('stats', key, e.target.checked)}
-                        className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-                      />
-                      <span className="text-sm capitalize">{String(key).replace('show', '')}</span>
-                    </label>
-                  ),
-                )}
+                <label className="flex items-center gap-3 p-3 bg-white dark:bg-black rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer">
+                  <input type="checkbox" checked={config.sections.stats.showCommits} onChange={(e) => onUpdateSection('stats', 'showCommits', e.target.checked)} className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" />
+                  <span className="text-sm">{t('controls.showCommits')}</span>
+                </label>
+                <label className="flex items-center gap-3 p-3 bg-white dark:bg-black rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer">
+                  <input type="checkbox" checked={config.sections.stats.showStars} onChange={(e) => onUpdateSection('stats', 'showStars', e.target.checked)} className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" />
+                  <span className="text-sm">{t('controls.showStars')}</span>
+                </label>
+                <label className="flex items-center gap-3 p-3 bg-white dark:bg-black rounded-lg border border-gray-200 dark:border-gray-700 cursor-pointer">
+                  <input type="checkbox" checked={config.sections.stats.showFollowers} onChange={(e) => onUpdateSection('stats', 'showFollowers', e.target.checked)} className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500" />
+                  <span className="text-sm">{t('controls.showFollowers')}</span>
+                </label>
               </div>
             )}
           </div>
@@ -258,7 +257,7 @@ export function ControlsPanel({
         {activeTab === 'languages' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
-              <label className="text-sm font-semibold">Enable Languages Section</label>
+              <label className="text-sm font-semibold">{t('controls.enableLangs')}</label>
               <Toggle
                 checked={config.sections.languages.enabled}
                 onChange={(val) => onUpdateSection('languages', 'enabled', val)}
@@ -266,7 +265,7 @@ export function ControlsPanel({
             </div>
             {config.sections.languages.enabled && (
               <div className="space-y-2">
-                <label className="text-sm font-semibold">Amount of Languages to Show</label>
+                <label className="text-sm font-semibold">{t('controls.langAmount')}</label>
                 <input
                   type="number"
                   min="1"
@@ -283,7 +282,7 @@ export function ControlsPanel({
         {activeTab === 'activity' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between mb-4 p-2 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800">
-              <label className="text-sm font-semibold">Enable Activity Section</label>
+              <label className="text-sm font-semibold">{t('controls.enableActivity')}</label>
               <Toggle
                 checked={config.sections.activity.enabled}
                 onChange={(val) => onUpdateSection('activity', 'enabled', val)}
@@ -291,7 +290,7 @@ export function ControlsPanel({
             </div>
             {config.sections.activity.enabled && (
               <div className="space-y-2">
-                <label className="text-sm font-semibold">Commits to Show</label>
+                <label className="text-sm font-semibold">{t('controls.commitsToShow')}</label>
                 <input
                   type="number"
                   min="1"
@@ -308,7 +307,7 @@ export function ControlsPanel({
         {activeTab === 'style' && (
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-semibold">README Style</label>
+              <label className="text-sm font-semibold">{t('controls.readmeStyle')}</label>
               <select
                 value={config.style ?? 'terminal'}
                 onChange={(e) => onStyleChange(e.target.value as StyleValue)}
@@ -320,7 +319,7 @@ export function ControlsPanel({
               </select>
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-semibold">Text</label>
+              <label className="text-sm font-semibold">{t('controls.text')}</label>
               <textarea
                 value={config.styleText ?? ''}
                 onChange={(e) => onStyleTextChange(e.target.value)}
@@ -333,25 +332,23 @@ export function ControlsPanel({
         {activeTab === 'setup' && (
           <div className="space-y-6">
             <div className="p-4 bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 rounded-lg">
-              <h3 className="text-sm font-bold mb-2">Option 1: Manual (Static)</h3>
+              <h3 className="text-sm font-bold mb-2">{t('setup.manualTitle')}</h3>
               <p className="text-sm text-gray-600 dark:text-gray-300">
-                Simply copy the generated Markdown from the preview panel and paste it into your repository with the same name as your github username as a
-                README.md
-                file.
+                {t('setup.manualText')}
               </p>
             </div>
 
             <div className="p-4 bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900 rounded-lg">
               <h3 className="text-sm font-bold text-blue-900 dark:text-blue-100 mb-2">
-                Option 2: Automatic (Daily Updates)
+                {t('setup.autoTitle')}
               </h3>
               <ol className="list-decimal list-inside text-sm text-blue-800 dark:text-blue-200 space-y-1">
-                <li>Create a repository with the same name as your github username.</li>
+                <li>{t('setup.autoStep1')}</li>
                 <li>
-                  Copy <code>profile.config.json</code> in the repository root with the content below.
+                  {t('setup.autoStep2')}
                 </li>
                 <li>
-                  Copy <code>.github/workflows/update-readme.yml</code> and add it to the repository root.
+                  {t('setup.autoStep3')}
                 </li>
               </ol>
             </div>
@@ -371,12 +368,12 @@ export function ControlsPanel({
         {isGenerating ? (
           <>
             <RefreshCw className="w-5 h-5 animate-spin" />
-            Generating Profile...
+            {t('controls.generating')}
           </>
         ) : (
           <>
             <RefreshCw className="w-5 h-5" />
-            Generate README
+            {t('controls.generate')}
           </>
         )}
       </button>

@@ -9,6 +9,7 @@ import { useAsciiPreview } from './hooks/useAsciiPreview';
 import { useClipboard } from './hooks/useClipboard';
 import { useFonts } from './hooks/useFonts';
 import { useReadmePreview } from './hooks/useReadmePreview';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 const initialConfig: Config = {
   username: '',
@@ -38,7 +39,7 @@ const initialConfig: Config = {
   },
 };
 
-export default function Home() {
+function AppContent() {
   const [config, setConfig] = useState<Config>(initialConfig);
   const [activeTab, setActiveTab] = useState<TabId>('general');
 
@@ -105,5 +106,13 @@ export default function Home() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }

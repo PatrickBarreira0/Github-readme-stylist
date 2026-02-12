@@ -2,6 +2,7 @@
 
 import { Copy, Github } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { useLanguage } from '../contexts/LanguageContext';
 
 type PreviewPanelProps = {
   fullPreview: string;
@@ -11,21 +12,22 @@ type PreviewPanelProps = {
 };
 
 export function PreviewPanel({ fullPreview, asciiPreview, copied, onCopy }: PreviewPanelProps) {
+  const { t } = useLanguage();
   const cleanedPreview = (fullPreview ?? '').replace(/<!--[\s\S]*?-->/g, '').trim();
 
   return (
     <div className="lg:col-span-7">
       <div className="h-full rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black shadow-sm overflow-hidden flex flex-col">
         <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
-          <span className="text-sm font-medium text-gray-500">Preview</span>
+          <span className="text-sm font-medium text-gray-500">{t('preview.title')}</span>
           <button
             onClick={onCopy}
             className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium bg-black dark:bg-white text-white dark:text-black rounded-md hover:opacity-90 transition-opacity"
           >
-            {copied ? 'Copied!' : (
+            {copied ? t('preview.copied') : (
               <>
                 <Copy className="w-4 h-4" />
-                Copy Markdown
+                {t('preview.copy')}
               </>
             )}
           </button>
@@ -65,13 +67,13 @@ export function PreviewPanel({ fullPreview, asciiPreview, copied, onCopy }: Prev
             <pre className="font-mono text-xs sm:text-sm leading-none whitespace-pre select-all text-center flex flex-col items-center justify-center h-full">
               {asciiPreview}
               <div className="mt-8 text-gray-500 text-sm font-sans">
-                (Live ASCII preview - Click Generate for full details)
+                {t('preview.asciiLive')}
               </div>
             </pre>
           ) : (
             <div className="flex flex-col items-center justify-center h-full text-gray-500 space-y-4">
               <Github className="w-12 h-12 opacity-20" />
-              <p>Configure your settings and click Generate</p>
+              <p>{t('preview.emptyState')}</p>
             </div>
           )}
         </div>
@@ -79,4 +81,3 @@ export function PreviewPanel({ fullPreview, asciiPreview, copied, onCopy }: Prev
     </div>
   );
 }
-
