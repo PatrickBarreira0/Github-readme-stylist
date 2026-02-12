@@ -10,7 +10,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/main.ts",
-    "debug": "tsx src/debug.ts"
+    "debug": "tsx src/debug.ts",
+    "build:action": "esbuild src/main.ts --bundle --platform=node --target=node20 --outfile=../../dist/index.js --loader:.flf=text"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

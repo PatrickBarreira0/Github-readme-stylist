@@ -1,22 +1,9 @@
 import figlet from 'figlet';
-import fs from 'fs';
-import path from 'path';
 import type { Section } from './types.js';
 import type { GitHubData } from '../fetcher.js';
 import type { Config } from '../config.js';
 import { addCatsToAscii } from '../ascii/cats.js';
-
-export function renderAscii(text: string, font: string = 'Standard'): string {
-    const trimmed = text.trim();
-    if (!trimmed) {
-        throw new Error('ASCII text cannot be empty');
-    }
-    return figlet.textSync(trimmed, { 
-        font: font as any, 
-        width: 1000, 
-        whitespaceBreak: true 
-    });
-}
+import { customFonts } from '../ascii/custom-fonts.js';
 
 function hasInk(fontName: string, charCode: number): boolean {
     const font = (figlet as any).figFonts?.[fontName];
@@ -33,8 +20,7 @@ function hasInk(fontName: string, charCode: number): boolean {
     });
 }
 
-    // Helper to patch 0-width space in FLF data
-    function patchFlfSpace(data: string): string {
+function patchFlfSpace(data: string): string {
     if (data.charCodeAt(0) === 0xFEFF) {
         data = data.slice(1);
     }
@@ -47,7 +33,6 @@ function hasInk(fontName: string, charCode: number): boolean {
     const hardblank = header.charAt(5); 
     
     const headerParts = header.split(' ');
-
     const heightStr = headerParts[1] ?? '0';
     const commentLinesStr = headerParts[5] ?? '0';
 
@@ -84,17 +69,6 @@ function hasInk(fontName: string, charCode: number): boolean {
     return data;
 }
 
-export function loadCustomFont(font: string, fontsDir: string): boolean {
-    const customFontPath = path.resolve(fontsDir, `${font}.flf`);
-    if (fs.existsSync(customFontPath)) {
-        let fontData = fs.readFileSync(customFontPath, 'utf8');
-        fontData = patchFlfSpace(fontData);
-        figlet.parseFont(font, fontData);
-        return true;
-    }
-    return false;
-}
-
 export function processTextForFont(text: string, font: string): string {
     const hasUpper = hasInk(font, 65);
     const hasLower = hasInk(font, 97);
@@ -107,17 +81,35 @@ export function processTextForFont(text: string, font: string): string {
     return text;
 }
 
+export function renderAscii(text: string, font: string = 'Standard'): string {
+    let textToRender = text.trim();
+    if (!textToRender) {
+        throw new Error('ASCII text cannot be empty');
+    }
+
+    if (customFonts[font]) {
+        let fontContent = customFonts[font];
+        fontContent = patchFlfSpace(fontContent);
+
+        figlet.parseFont(font, fontContent);
+
+        textToRender = processTextForFont(textToRender, font);
+    }
+
+    return figlet.textSync(textToRender, { 
+        font: font as any, 
+        width: 1000, 
+        whitespaceBreak: true 
+    });
+}
+
+
 export const asciiSection: Section = {
     id: 'ascii',
     render(_data: GitHubData, config: Config): string {
-        let { text, font } = config.sections.ascii;
-
-        const fontsDir = path.resolve(process.cwd(), 'assets', 'fonts');
-        if (loadCustomFont(font, fontsDir)) {
-             text = processTextForFont(text, font);
-        }
-
+        const { text, font } = config.sections.ascii;
         const art = renderAscii(text, font);
+        
         const output = config.sections.ascii.showCats ? addCatsToAscii(art) : art;
         const styleText = config.style === 'classic' ? (config.styleText ?? '').trim() : '';
         const suffix = styleText ? `\n${styleText}` : '';

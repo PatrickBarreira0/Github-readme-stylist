@@ -5,8 +5,3 @@ export interface Section {
     id: string;
     render(data: GitHubData, config: Config): string;
 }
-
-
-
-
-

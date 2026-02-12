@@ -1,62 +1,37 @@
 'use server';
 
-import { renderAscii, loadCustomFont, processTextForFont, generateReadmeContent, renderReadmeFromData, fetchGitHubData, addCatsToAscii } from '@github-readme-stylist/core';
+import { 
+  renderAscii, 
+  generateReadmeContent, 
+  fetchGitHubData, 
+  addCatsToAscii, 
+  renderReadmeFromData,
+  customFontNames
+} from '@github-readme-stylist/core';
 import type { Config, GitHubData } from '@github-readme-stylist/core';
-import path from 'path';
-import fs from 'fs';
-
-function findFontsDir() {
-  const candidates = [
-    path.resolve(process.cwd(), 'assets', 'fonts'),
-    path.resolve(process.cwd(), '../../assets/fonts'),
-    path.resolve(process.cwd(), '../../../assets/fonts'),
-  ];
-
-  for (const dir of candidates) {
-    if (fs.existsSync(dir)) {
-      return dir;
-    }
-  }
-  return null;
-}
 
 export async function generateAsciiArt(text: string, font: string, showCats: boolean) {
   if (!text) return '';
   try {
-    const fontsDir = findFontsDir();
-    if (fontsDir) {
-        loadCustomFont(font, fontsDir);
-        const processedText = processTextForFont(text, font);
-        const art = renderAscii(processedText, font);
-        return showCats ? addCatsToAscii(art) : art;
-    }
+
     const art = renderAscii(text, font);
     return showCats ? addCatsToAscii(art) : art;
-  } catch (e) {
+  } catch (e: any) {
     console.error('Error generating ASCII art:', e);
-    return 'Error generating ASCII art';
+    return `Error: ${e.message || 'Failed to generate'}`;
   }
 }
 
 export async function getFonts() {
-  const fontsDir = findFontsDir();
-  let customFonts: string[] = [];
-  
-  if (fontsDir && fs.existsSync(fontsDir)) {
-    const files = fs.readdirSync(fontsDir);
-    files.forEach(file => {
-      if (file.endsWith('.flf')) {
-        customFonts.push(file.replace('.flf', ''));
-      }
-    });
-  }
-  
   const standardFonts = [
-    'Standard', 'Keyboard','Ghost', 'Graffiti', 'Slant', 'Big', 'Banner', 'Block', 'Bubble', 'Mini', 'Script', 'Shadow', 'Small', 'Speed', 'Star Wars', 'Avatar', 'Big Money-SE', 'BlurVision ASCII', 'Chiseled'
+    'Standard', 'Keyboard','Ghost', 'Graffiti', 'Slant', 'Big', 'Banner', 
+    'Block', 'Bubble', 'Mini', 'Script', 'Shadow', 'Small', 'Speed', 
+    'Star Wars', 'Avatar', 'Big Money-SE', 'BlurVision ASCII', 'Chiseled'
   ];
   
-  // Return unique sorted fonts
-  return Array.from(new Set([...standardFonts, ...customFonts])).sort();
+  const allFonts = [...standardFonts, ...customFontNames];
+
+  return Array.from(new Set(allFonts)).sort();
 }
 
 export async function fetchGitHubDataForUser(username: string) {
@@ -75,15 +50,7 @@ export async function fetchGitHubDataForUser(username: string) {
 
 export async function renderReadmeFromDataAction(config: Config, data: GitHubData) {
     try {
-        const configCopy = structuredClone(config);
-        if (configCopy.sections.ascii.enabled) {
-            const fontsDir = findFontsDir();
-            if (fontsDir) {
-                loadCustomFont(configCopy.sections.ascii.font, fontsDir);
-                configCopy.sections.ascii.text = processTextForFont(configCopy.sections.ascii.text, configCopy.sections.ascii.font);
-            }
-        }
-        const content = renderReadmeFromData(data, configCopy);
+        const content = renderReadmeFromData(data, config);
         return { success: true, content };
     } catch (error: any) {
         console.error('Error rendering README:', error);
@@ -104,4 +71,3 @@ export async function generateFullReadme(config: Config) {
         return { success: false, error: error.message || 'Unknown error occurred' };
     }
 }
-
