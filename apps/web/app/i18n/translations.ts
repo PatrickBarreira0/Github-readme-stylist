@@ -46,7 +46,8 @@ export const translations = {
       autoTitle: 'Option 2: Automatic (Daily Updates)',
       autoStep1: 'Create a repository with the same name as your github username.',
       autoStep2: 'Copy profile.config.json in the repository root with the content below.',
-      autoStep3: 'Copy .github/workflows/update-readme.yml and add it to the repository root.',
+      autoStep3: 'Copy .github/workflows/update-readme.yml and add it to the repository root. (Make sure you copy the dot in the filename)',
+      autoStep4: 'And thats it, Your README will be updated daily with the latest data, if you want to update it manually, run the github action by hand.',
     }
   },
   pt: {
@@ -94,7 +95,8 @@ export const translations = {
       autoTitle: 'Opção 2: Automático (Atualizações Diárias)',
       autoStep1: 'Crie um repositório com o mesmo nome do seu usuário do GitHub.',
       autoStep2: 'Copie profile.config.json na raiz do repositório com o conteúdo abaixo.',
-      autoStep3: 'Copie .github/workflows/update-readme.yml e adicione-o à raiz do repositório.',
+      autoStep3: 'Copie .github/workflows/update-readme.yml e adicione-o à raiz do repositório. (Certifique-se de copiar o ponto no nome do arquivo)',
+      autoStep4: 'Tudo pronto, seu README será atualizado diariamente com os dados mais recentes, se você quiser atualizá-lo manualmente, execute a ação do github na mão.',
     }
   },
 };
