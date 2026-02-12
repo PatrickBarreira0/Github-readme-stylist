@@ -1,6 +1,4 @@
 import figlet from 'figlet';
-import fs from 'fs';
-import path from 'path';
 import type { Section } from './types.js';
 import type { GitHubData } from '../fetcher.js';
 import type { Config } from '../config.js';
@@ -71,22 +69,6 @@ function patchFlfSpace(data: string): string {
     return data;
 }
 
-function loadFont(fontName: string) {
-    
-    if (figlet.figFonts && figlet.figFonts[fontName]) return;
-
-    const fontPath = path.join(process.cwd(), 'node_modules/figlet/fonts', `${fontName}.flf`);
-
-    try {
-        if (fs.existsSync(fontPath)) {
-            const fontContent = fs.readFileSync(fontPath, 'utf8');
-            figlet.parseFont(fontName, fontContent);
-        }
-    } catch (e) {
-        console.warn(`Could not auto-load font: ${fontName}`, e);
-    }
-}
-
 export function processTextForFont(text: string, font: string): string {
     const hasUpper = hasInk(font, 65);
     const hasLower = hasInk(font, 97);
@@ -103,10 +85,6 @@ export function renderAscii(text: string, font: string = 'Standard'): string {
     let textToRender = text.trim();
     if (!textToRender) {
         throw new Error('ASCII text cannot be empty');
-    }
-
-    if (!customFonts[font]) {
-        loadFont(font);
     }
 
     if (customFonts[font]) {
