@@ -164,7 +164,8 @@ export function ControlsPanel({
               <input
                 type="text"
                 value={config.username}
-                onChange={(e) => onUsernameChange(e.target.value)}
+                onChange={(e) => onUsernameChange(e.target.value.slice(0, 30))}
+                maxLength={30}
                 className="w-full p-3 rounded-lg border bg-white dark:bg-black border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
                 placeholder={t('controls.placeholderUser')}
               />
@@ -187,7 +188,8 @@ export function ControlsPanel({
                   <label className="text-sm font-semibold">{t('controls.text')}</label>
                   <textarea
                     value={config.sections.ascii.text}
-                    onChange={(e) => onUpdateSection('ascii', 'text', e.target.value)}
+                    onChange={(e) => onUpdateSection('ascii', 'text', e.target.value.slice(0, 1000))}
+                    maxLength={1000}
                     className="w-full p-3 rounded-lg border bg-white dark:bg-black border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
                   />
                 </div>
@@ -313,7 +315,8 @@ export function ControlsPanel({
               <label className="text-sm font-semibold">{t('controls.text')}</label>
               <textarea
                 value={config.styleText ?? ''}
-                onChange={(e) => onStyleTextChange(e.target.value)}
+                onChange={(e) => onStyleTextChange(e.target.value.slice(0, 1000))}
+                maxLength={1000}
                 className="w-full p-3 rounded-lg border bg-white dark:bg-black border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
