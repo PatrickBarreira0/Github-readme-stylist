@@ -1,6 +1,6 @@
 'use client';
 
-import { Terminal } from 'lucide-react';
+import { Terminal, Github } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 // --- Flag Components (SVG) ---
@@ -72,22 +72,34 @@ export function Header() {
         </div>
       </div>
 
-      <button
-        onClick={toggleLanguage}
-        className="group flex items-center gap-3 px-4 py-2 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all shadow-sm"
-        title={language === 'en' ? 'Mudar para Português' : 'Switch to English'}
-      >
-        <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-          {language === 'en' ? 'English' : 'Português'}
-        </span>
-        <div className="relative w-8 h-6 shadow-sm rounded overflow-hidden ring-1 ring-black/10">
-          {language === 'en' ? (
-            <FlagUSA className="w-full h-full object-cover" />
-          ) : (
-            <FlagBrazil className="w-full h-full object-cover" />
-          )}
-        </div>
-      </button>
+      <div className="flex items-center gap-3">
+        <a
+          href="https://github.com/PatrickBarreira0/Github-readme-stylist"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-all shadow-sm font-medium text-sm"
+        >
+          <Github className="w-4 h-4" />
+          <span>Star on GitHub</span>
+        </a>
+
+        <button
+          onClick={toggleLanguage}
+          className="group flex items-center gap-3 px-4 py-2 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all shadow-sm"
+          title={language === 'en' ? 'Mudar para Português' : 'Switch to English'}
+        >
+          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+            {language === 'en' ? 'English' : 'Português'}
+          </span>
+          <div className="relative w-8 h-6 shadow-sm rounded overflow-hidden ring-1 ring-black/10">
+            {language === 'en' ? (
+              <FlagUSA className="w-full h-full object-cover" />
+            ) : (
+              <FlagBrazil className="w-full h-full object-cover" />
+            )}
+          </div>
+        </button>
+      </div>
     </header>
   );
 }
