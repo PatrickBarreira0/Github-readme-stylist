@@ -64,10 +64,15 @@ async function main() {
     }
 
     if (style !== 'classic') {
+        const styleMarker = '';
+
+        if (!readmeContent.includes(styleMarker)) {
+            readmeContent = `${styleMarker}\n`;
+        }
+
         for (const section of sections) {
             readmeContent = removeSection(readmeContent, section.id);
         }
-        readmeContent = ensureSection(readmeContent, 'style');
         const rendered = style === 'compact'
             ? renderCompactLayout(data, config)
             : renderTerminalLayout(data, config);

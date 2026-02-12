@@ -18,7 +18,7 @@ const initialConfig: Config = {
   sections: {
     ascii: {
       enabled: true,
-      text: 'Read me',
+      text: 'About Me',
       font: 'Standard',
       showCats: false,
     },
