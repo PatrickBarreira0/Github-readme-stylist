@@ -2,8 +2,15 @@ import figlet from 'figlet';
 import type { Section } from './types.js';
 import type { GitHubData } from '../fetcher.js';
 import type { Config } from '../config.js';
+import path from 'path';
+import fs from 'fs';
 import { addCatsToAscii } from '../ascii/cats.js';
 import { customFonts } from '../ascii/custom-fonts.js';
+
+const fontDir = path.join(process.cwd(), 'node_modules/figlet/fonts');
+if (fs.existsSync(fontDir)) {
+    figlet.defaults({ fontPath: fontDir });
+}
 
 function hasInk(fontName: string, charCode: number): boolean {
     const font = (figlet as any).figFonts?.[fontName];
