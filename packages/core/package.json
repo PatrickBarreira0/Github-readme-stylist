@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "tsx src/main.ts",
     "debug": "tsx src/debug.ts",
-    "build:action": "esbuild src/main.ts --bundle --platform=node --target=node20 --outfile=../../dist/index.js --loader:.flf=text --format=cjs"
+    "build:action": "node build.js"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "@types/figlet": "^1.7.0",
     "@types/node": "^25.0.3",
+    "esbuild": "^0.27.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
