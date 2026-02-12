@@ -17,6 +17,7 @@ if (!fs.existsSync(fontsDir)) {
 }
 
 if (!fs.existsSync(fontsDir)) {
+    console.error('Figlet fonts directory not found');
     process.exit(1);
 }
 
@@ -27,15 +28,38 @@ if (fs.existsSync(outputDir)) {
 }
 fs.mkdirSync(outputDir, { recursive: true });
 
-const files = fs.readdirSync(fontsDir).filter(f => f.endsWith('.flf'));
+const wantedFonts = new Set([
+  'Standard.flf',
+  'Keyboard.flf',
+  'Ghost.flf',
+  'Graffiti.flf',
+  'Slant.flf',
+  'Big.flf',
+  'Banner.flf',
+  'Block.flf',
+  'Bubble.flf',
+  'Mini.flf',
+  'Script.flf',
+  'Shadow.flf',
+  'Small.flf',
+  'Speed.flf',
+  'Star Wars.flf',
+  'Avatar.flf',
+  'Big Money-se.flf',
+  'BlurVision ASCII.flf', 
+  'Chiseled.flf'
+]);
+
+const files = fs.readdirSync(fontsDir).filter(f => wantedFonts.has(f));
 
 const imports: string[] = [];
 const mapEntries: string[] = [];
 
-files.forEach((file, index) => {
+files.forEach((file) => {
     const fontName = file.replace('.flf', '');
-    const varName = `font_${index}`;
-    
+    // Sanitize filename for variable usage
+    const safeVarName = fontName.replace(/[^a-zA-Z0-9]/g, '_'); 
+    // Sanitize filename for disk (figlet sometimes has spaces)
     const safeFileName = file.replace(/[^a-zA-Z0-9.-]/g, '_');
     
     const srcPath = path.join(fontsDir, file);
@@ -44,9 +68,9 @@ files.forEach((file, index) => {
     fs.copyFileSync(srcPath, destPath);
 
     const safeKey = fontName.replace(/'/g, "\\'");
-
-    imports.push(`import ${varName} from './${safeFileName}';`);
-    mapEntries.push(`  '${safeKey}': ${varName},`);
+    
+    imports.push(`import ${safeVarName} from './${safeFileName}';`);
+    mapEntries.push(`  '${safeKey}': ${safeVarName},`);
 });
 
 const content = `${imports.join('\n')}
