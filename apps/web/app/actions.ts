@@ -17,8 +17,7 @@ export async function generateAsciiArt(text: string, font: string, showCats: boo
     const art = renderAscii(text, font);
     return showCats ? addCatsToAscii(art) : art;
   } catch (e: any) {
-    console.error('Error generating ASCII art:', e);
-    return `Error: ${e.message || 'Failed to generate'}`;
+    return '';
   }
 }
 
@@ -43,8 +42,17 @@ export async function fetchGitHubDataForUser(username: string) {
         const data = await fetchGitHubData(username, token);
         return { success: true, data };
     } catch (error: any) {
-        console.error('Error fetching GitHub data:', error);
-        return { success: false, error: error.message || 'Unknown error occurred' };
+        const errorMessage = error.message || 'Unknown error occurred';
+        
+        if (errorMessage.startsWith('INVALID_USERNAME:')) {
+            return { success: false, error: errorMessage.replace('INVALID_USERNAME:', '') };
+        }
+        
+        if (errorMessage.startsWith('GENERIC_ERROR:')) {
+            return { success: false, error: errorMessage.replace('GENERIC_ERROR:', '') };
+        }
+        
+        return { success: false, error: 'An unexpected error occurred. Please try again later.' };
     }
 }
 
@@ -53,8 +61,7 @@ export async function renderReadmeFromDataAction(config: Config, data: GitHubDat
         const content = renderReadmeFromData(data, config);
         return { success: true, content };
     } catch (error: any) {
-        console.error('Error rendering README:', error);
-        return { success: false, error: error.message || 'Unknown error occurred' };
+        return { success: false, error: 'Failed to generate README preview. Please try again.' };
     }
 }
 
@@ -67,7 +74,16 @@ export async function generateFullReadme(config: Config) {
         const content = await generateReadmeContent(config, token);
         return { success: true, content };
     } catch (error: any) {
-        console.error('Error generating README:', error);
-        return { success: false, error: error.message || 'Unknown error occurred' };
+        const errorMessage = error.message || 'Unknown error occurred';
+        
+        if (errorMessage.startsWith('INVALID_USERNAME:')) {
+            return { success: false, error: errorMessage.replace('INVALID_USERNAME:', '') };
+        }
+        
+        if (errorMessage.startsWith('GENERIC_ERROR:')) {
+            return { success: false, error: errorMessage.replace('GENERIC_ERROR:', '') };
+        }
+        
+        return { success: false, error: 'Failed to generate README. Please try again later.' };
     }
 }

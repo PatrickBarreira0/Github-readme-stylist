@@ -84,7 +84,18 @@ export async function fetchGitHubData(username: string, token?: string): Promise
     }
     `;
 
-    const data = await graphQLClient.request<GraphQLResponse>(query, { login: username });
+    let data: GraphQLResponse;
+    try {
+        data = await graphQLClient.request<GraphQLResponse>(query, { login: username });
+    } catch (error: any) {
+        const errorMessage = error?.response?.errors?.[0]?.message || error?.message || String(error);
+        
+        if (errorMessage.includes('Could not resolve to a User with the login of')) {
+            throw new Error(`INVALID_USERNAME:GitHub user "${username}" not found. Please check the username and try again.`);
+        }
+        
+        throw new Error('GENERIC_ERROR:Unable to fetch GitHub data. Please check your username and try again.');
+    }
 
     const totalStars = data.user.repositories.nodes.reduce((sum, repo) => sum + repo.stargazerCount, 0);
 

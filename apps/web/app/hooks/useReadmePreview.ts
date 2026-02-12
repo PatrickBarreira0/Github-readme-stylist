@@ -30,11 +30,11 @@ export function useReadmePreview(config: Config) {
           setFullPreview(result.content);
           setError('');
         } else {
-          setError(result.error || 'Failed to render README');
+          setError(result.error || 'An error occurred while generating the preview');
         }
       } catch (e: any) {
         if (requestId === fullRenderId.current) {
-          setError(e.message);
+          setError('An error occurred while generating the preview');
         }
       }
     }, 500);
@@ -51,7 +51,7 @@ export function useReadmePreview(config: Config) {
     try {
       const dataResult = await fetchGitHubDataForUser(config.username);
       if (!dataResult.success || !dataResult.data) {
-        setError(dataResult.error || 'Failed to fetch GitHub data');
+        setError(dataResult.error || 'An error occurred. Please try again.');
         return;
       }
       setGitHubData(dataResult.data);
@@ -60,10 +60,10 @@ export function useReadmePreview(config: Config) {
       if (renderResult.success && renderResult.content) {
         setFullPreview(renderResult.content);
       } else {
-        setError(renderResult.error || 'Failed to render README');
+        setError(renderResult.error || 'An error occurred while generating the preview');
       }
     } catch (e: any) {
-      setError(e.message);
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setIsGenerating(false);
     }
