@@ -4,6 +4,7 @@ import type { GitHubData } from '../fetcher.js';
 import type { Config } from '../config.js';
 import { addCatsToAscii } from '../ascii/cats.js';
 import { customFonts } from '../ascii/custom-fonts.js';
+import { bundledFonts } from '../ascii/generated/index.js';
 
 function hasInk(fontName: string, charCode: number): boolean {
     const font = (figlet as any).figFonts?.[fontName];
@@ -87,14 +88,15 @@ export function renderAscii(text: string, font: string = 'Standard'): string {
         throw new Error('ASCII text cannot be empty');
     }
 
-    if (customFonts[font]) {
-        let fontContent = customFonts[font];
-        fontContent = patchFlfSpace(fontContent);
+    const fontContent = customFonts[font] || bundledFonts[font];
 
-        figlet.parseFont(font, fontContent);
+    if (fontContent) {
+        const patchedContent = patchFlfSpace(fontContent);
+        figlet.parseFont(font, patchedContent);
 
         textToRender = processTextForFont(textToRender, font);
-    }
+    } 
+
 
     return figlet.textSync(textToRender, { 
         font: font as any, 
@@ -102,7 +104,6 @@ export function renderAscii(text: string, font: string = 'Standard'): string {
         whitespaceBreak: true 
     });
 }
-
 
 export const asciiSection: Section = {
     id: 'ascii',
