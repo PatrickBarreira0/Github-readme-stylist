@@ -26,9 +26,9 @@ Software Developer
   ,-.       _,---._ __  / \                                          )     (
  /  )    .-'       `./ /   \                                         =\   /=
 (  (   ,'            `/    /|  ┌ Languages ──────────────────── ┐    )   (
- \  `-'             \'\   / |  │ TypeScript ██████████░░  85.5% │   /     \
-  `.              ,  \ \ /  |  │ Python     █░░░░░░░░░░░   4.3% │   )     (
-   /`.          ,'-`----Y   |  │ JavaScript █░░░░░░░░░░░   4.3% │  /       \
+ \  `-'             \'\   / |  │ TypeScript ██████████░░  85.8% │   /     \
+  `.              ,  \ \ /  |  │ Python     █░░░░░░░░░░░   4.2% │   )     (
+   /`.          ,'-`----Y   |  │ JavaScript █░░░░░░░░░░░   4.2% │  /       \
   (            ;        |   '  │ CSS        ░░░░░░░░░░░░   2.1% │  \       /
   |  ,-.    ,-'         |  /   │ C#         ░░░░░░░░░░░░   1.9% │   \__ __/
   |  | (   |            | /    └────────────────────────────────┘      ))
@@ -37,7 +37,7 @@ Software Developer
                                                                        \)
 
 ┌ Activity ────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/Github-readme-stylist │  │ Commits 275 │
+│ Push PatrickBarreira0/Github-readme-stylist │  │ Commits 182 │
 │ Push PatrickBarreira0/Github-readme-stylist │  └─────────────┘
 └─────────────────────────────────────────────┘
 ```
