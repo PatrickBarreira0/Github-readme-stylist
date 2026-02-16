@@ -1,5 +1,9 @@
 'use server';
 
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+import { headers } from "next/headers";
+
 import { 
   renderAscii, 
   generateReadmeContent, 
@@ -10,10 +14,24 @@ import {
 } from '@github-readme-stylist/core';
 import type { Config, GitHubData } from '@github-readme-stylist/core';
 
+const redis = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN
+  ? new Redis({
+      url: process.env.KV_REST_API_URL,
+      token: process.env.KV_REST_API_TOKEN,
+    })
+  : null;
+
+const ratelimit = redis
+  ? new Ratelimit({
+      redis: redis,
+      limiter: Ratelimit.slidingWindow(10, "60 s"),
+      analytics: true,
+    })
+  : null;
+
 export async function generateAsciiArt(text: string, font: string, showCats: boolean) {
   if (!text) return '';
   try {
-
     const art = renderAscii(text, font);
     return showCats ? addCatsToAscii(art) : art;
   } catch (e: any) {
@@ -34,6 +52,20 @@ export async function getFonts() {
 }
 
 export async function fetchGitHubDataForUser(username: string) {
+    if (ratelimit) {
+        const headersList = await headers();
+        const ip = headersList.get("x-forwarded-for") ?? "127.0.0.1";
+        
+        const { success } = await ratelimit.limit(ip);
+        
+        if (!success) {
+            return { 
+                success: false, 
+                error: "Rate limit exceeded. Please try again in a minute." 
+            };
+        }
+    }
+
     try {
         const token = process.env.GITHUB_TOKEN;
         if (!token) {
@@ -66,6 +98,20 @@ export async function renderReadmeFromDataAction(config: Config, data: GitHubDat
 }
 
 export async function generateFullReadme(config: Config) {
+    if (ratelimit) {
+        const headersList = await headers();
+        const ip = headersList.get("x-forwarded-for") ?? "127.0.0.1";
+        
+        const { success } = await ratelimit.limit(ip);
+        
+        if (!success) {
+            return { 
+                success: false, 
+                error: "Rate limit exceeded. Please try again in a minute." 
+            };
+        }
+    }
+
     try {
         const token = process.env.GITHUB_TOKEN;
         if (!token) {
