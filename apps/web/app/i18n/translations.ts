@@ -37,7 +37,7 @@ export const translations = {
       title: 'Preview',
       copy: 'Copy Markdown',
       copied: 'Copied!',
-      asciiLive: '(Live ASCII preview - Click Generate for full details)',
+      asciiLive: '(Live ASCII preview - Click Generate on general for full details)',
       emptyState: 'Configure your settings and click Generate',
     },
     setup: {
@@ -86,7 +86,7 @@ export const translations = {
       title: 'Pré-visualização',
       copy: 'Copiar Markdown',
       copied: 'Copiado!',
-      asciiLive: '(Prévia ASCII ao vivo - Clique em Gerar para detalhes)',
+      asciiLive: '(Prévia ASCII ao vivo - Clique em Gerar na seção geral para detalhes)',
       emptyState: 'Configure suas opções e clique em Gerar',
     },
     setup: {
