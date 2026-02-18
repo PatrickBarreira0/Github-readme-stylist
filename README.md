@@ -36,9 +36,8 @@ Software Developer
   `--'   `--'                                                          ((
                                                                        \)
 
-┌ Activity ────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/Github-readme-stylist │  │ Commits 185 │
-│ Push PatrickBarreira0/Github-readme-stylist │  └─────────────┘
-└─────────────────────────────────────────────┘
+┌ Stats ───── ┐
+│ Commits 185 │
+└─────────────┘
 ```
 <!-- END_SECTION:style -->
