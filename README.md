@@ -26,9 +26,9 @@ Software Developer
   ,-.       _,---._ __  / \                                          )     (
  /  )    .-'       `./ /   \                                         =\   /=
 (  (   ,'            `/    /|  ┌ Languages ──────────────────── ┐    )   (
- \  `-'             \'\   / |  │ TypeScript ██████████░░  85.9% │   /     \
-  `.              ,  \ \ /  |  │ Python     █░░░░░░░░░░░   4.2% │   )     (
-   /`.          ,'-`----Y   |  │ JavaScript █░░░░░░░░░░░   4.2% │  /       \
+ \  `-'             \'\   / |  │ TypeScript ██████████░░  85.0% │   /     \
+  `.              ,  \ \ /  |  │ Python     █░░░░░░░░░░░   5.2% │   )     (
+   /`.          ,'-`----Y   |  │ JavaScript ░░░░░░░░░░░░   4.1% │  /       \
   (            ;        |   '  │ CSS        ░░░░░░░░░░░░   2.1% │  \       /
   |  ,-.    ,-'         |  /   │ C#         ░░░░░░░░░░░░   1.8% │   \__ __/
   |  | (   |            | /    └────────────────────────────────┘      ))
@@ -36,9 +36,9 @@ Software Developer
   `--'   `--'                                                          ((
                                                                        \)
 
-┌ Activity ────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/Github-readme-stylist │  │ Commits 185 │
-│ Push PatrickBarreira0/Github-readme-stylist │  └─────────────┘
-└─────────────────────────────────────────────┘
+┌ Activity ──────────────────────────────────── ┐  ┌ Stats ───── ┐
+│ Create PatrickBarreira0/fraud-detection-ML    │  │ Commits 186 │
+│ Push   PatrickBarreira0/Github-readme-stylist │  └─────────────┘
+└───────────────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
