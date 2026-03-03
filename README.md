@@ -36,9 +36,9 @@ Software Developer
   `--'   `--'                                                          ((
                                                                        \)
 
-┌ Activity ─────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/Pokemon-Engine │  │ Commits 218 │
-│ Push PatrickBarreira0/Pokemon-Engine │  └─────────────┘
-└──────────────────────────────────────┘
+┌ Activity ───────────────────────────── ┐  ┌ Stats ───── ┐
+│ Push PatrickBarreira0/PatrickBarreira0 │  │ Commits 219 │
+│ Push PatrickBarreira0/Pokemon-Engine   │  └─────────────┘
+└────────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
