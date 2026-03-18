@@ -37,8 +37,8 @@ Software Developer
                                                                        \)
 
 ┌ Activity ────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Create PatrickBarreira0/JitterBit-Challenge │  │ Commits 221 │
-│ Push   PatrickBarreira0/PatrickBarreira0    │  └─────────────┘
+│ Watch  zachMahan64/pokemon-tbje             │  │ Commits 221 │
+│ Create PatrickBarreira0/JitterBit-Challenge │  └─────────────┘
 └─────────────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
