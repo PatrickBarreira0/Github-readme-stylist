@@ -36,9 +36,9 @@ Software Developer
   `--'   `--'                                                                ((
                                                                              \)
 
-┌ Activity ────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/projetodb │  │ Commits 224 │
-│ Push PatrickBarreira0/projetodb │  └─────────────┘
-└─────────────────────────────────┘
+┌ Activity ───────────────────────────────────── ┐  ┌ Stats ───── ┐
+│ Member DanielTelesdeOliveira/ML-evasao-escolar │  │ Commits 224 │
+│ Push   PatrickBarreira0/projetodb              │  └─────────────┘
+└────────────────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
