@@ -26,19 +26,19 @@ Software Developer
   ,-.       _,---._ __  / \                                                )     (
  /  )    .-'       `./ /   \                                               =\   /=
 (  (   ,'            `/    /|  ┌ Languages ────────────────────────── ┐    )   (
- \  `-'             \'\   / |  │ TypeScript       ██████░░░░░░  52.6% │   /     \
-  `.              ,  \ \ /  |  │ Jupyter Notebook ███░░░░░░░░░  27.5% │   )     (
+ \  `-'             \'\   / |  │ TypeScript       ██████░░░░░░  52.0% │   /     \
+  `.              ,  \ \ /  |  │ Jupyter Notebook ███░░░░░░░░░  27.2% │   )     (
    /`.          ,'-`----Y   |  │ JavaScript       █░░░░░░░░░░░   6.9% │  /       \
-  (            ;        |   '  │ Rust             █░░░░░░░░░░░   6.3% │  \       /
+  (            ;        |   '  │ Rust             █░░░░░░░░░░░   6.2% │  \       /
   |  ,-.    ,-'         |  /   │ Python           ░░░░░░░░░░░░   3.2% │   \__ __/
   |  | (   |            | /    └──────────────────────────────────────┘      ))
   )  |  \  `.___________|/                                                   //
   `--'   `--'                                                                ((
                                                                              \)
 
-┌ Activity ───────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Member DanielTelesdeOliveira/ML-evasao-escolar │  │ Commits 224 │
-│ Push   PatrickBarreira0/projetodb              │  └─────────────┘
-└────────────────────────────────────────────────┘
+┌ Activity ───────────────────────── ┐  ┌ Stats ───── ┐
+│ Push PatrickBarreira0/Projeto-DB-2 │  │ Commits 236 │
+│ Push PatrickBarreira0/Projeto-DB-2 │  └─────────────┘
+└────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
