@@ -37,7 +37,7 @@ Software Developer
                                                                              \)
 
 ┌ Activity ───────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/Projeto-DB-2 │  │ Commits 236 │
+│ Push PatrickBarreira0/projetodb    │  │ Commits 237 │
 │ Push PatrickBarreira0/Projeto-DB-2 │  └─────────────┘
 └────────────────────────────────────┘
 ```
