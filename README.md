@@ -36,9 +36,9 @@ Software Developer
   `--'   `--'                                                          ((
                                                                        \)
 
-┌ Activity ───────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/PatrickBarreira0 │  │ Commits 241 │
-│ Push PatrickBarreira0/PatrickBarreira0 │  └─────────────┘
-└────────────────────────────────────────┘
+┌ Activity ───────────────────────── ┐  ┌ Stats ───── ┐
+│ PullRequest gopzera/surebetmanager │  │ Commits 244 │
+│ PullRequest gopzera/surebetmanager │  └─────────────┘
+└────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
