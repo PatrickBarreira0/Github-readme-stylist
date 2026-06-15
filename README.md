@@ -36,9 +36,8 @@ Software Developer
   `--'   `--'                                                          ((
                                                                        \)
 
-┌ Activity ───────────────────────── ┐  ┌ Stats ───── ┐
-│ PullRequest gopzera/surebetmanager │  │ Commits 242 │
-│ PullRequest gopzera/surebetmanager │  └─────────────┘
-└────────────────────────────────────┘
+┌ Stats ───── ┐
+│ Commits 242 │
+└─────────────┘
 ```
 <!-- END_SECTION:style -->
