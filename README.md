@@ -36,8 +36,9 @@ Software Developer
   `--'   `--'                                                                ((
                                                                              \)
 
-┌ Activity ────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Create PatrickBarreira0/trabalho-ia-puc │  │ Commits 240 │
-└─────────────────────────────────────────┘  └─────────────┘
+┌ Activity ────────────────────── ┐  ┌ Stats ───── ┐
+│ Push   PatrickBarreira0/AI-LAB2 │  │ Commits 240 │
+│ Create PatrickBarreira0/AI-LAB2 │  └─────────────┘
+└─────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
