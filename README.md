@@ -37,8 +37,8 @@ Software Developer
                                                                              \)
 
 ┌ Activity ──────────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Create PatrickBarreira0/lab-bagging-boosting-iris │  │ Commits 240 │
-│ Push   PatrickBarreira0/AI-LAB2                   │  └─────────────┘
+│ Push   PatrickBarreira0/lab-bagging-boosting-iris │  │ Commits 240 │
+│ Create PatrickBarreira0/lab-bagging-boosting-iris │  └─────────────┘
 └───────────────────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
