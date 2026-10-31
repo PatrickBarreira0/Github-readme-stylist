@@ -26,8 +26,8 @@ Software Developer
   ,-.       _,---._ __  / \                                                )     (
  /  )    .-'       `./ /   \                                               =\   /=
 (  (   ,'            `/    /|  ┌ Languages ────────────────────────── ┐    )   (
- \  `-'             \'\   / |  │ Jupyter Notebook ███████░░░░░  57.4% │   /     \
-  `.              ,  \ \ /  |  │ JavaScript       ███░░░░░░░░░  24.2% │   )     (
+ \  `-'             \'\   / |  │ Jupyter Notebook ███████░░░░░  57.3% │   /     \
+  `.              ,  \ \ /  |  │ JavaScript       ███░░░░░░░░░  24.1% │   )     (
    /`.          ,'-`----Y   |  │ TypeScript       █░░░░░░░░░░░  12.0% │  /       \
   (            ;        |   '  │ CSS              ░░░░░░░░░░░░   2.6% │  \       /
   |  ,-.    ,-'         |  /   │ Rust             ░░░░░░░░░░░░   1.4% │   \__ __/
@@ -37,7 +37,7 @@ Software Developer
                                                                              \)
 
 ┌ Activity ──────────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push   PatrickBarreira0/lab-bagging-boosting-iris │  │ Commits 240 │
+│ Push   PatrickBarreira0/lab-bagging-boosting-iris │  │ Commits 241 │
 │ Create PatrickBarreira0/lab-bagging-boosting-iris │  └─────────────┘
 └───────────────────────────────────────────────────┘
 ```
