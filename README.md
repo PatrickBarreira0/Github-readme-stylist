@@ -37,8 +37,8 @@ Software Developer
                                                                              \)
 
 ┌ Activity ──────────────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push   PatrickBarreira0/lab-bagging-boosting-iris │  │ Commits 241 │
-│ Create PatrickBarreira0/lab-bagging-boosting-iris │  └─────────────┘
+│ Create PatrickBarreira0/leilao-soap-grupo-2       │  │ Commits 241 │
+│ Push   PatrickBarreira0/lab-bagging-boosting-iris │  └─────────────┘
 └───────────────────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
