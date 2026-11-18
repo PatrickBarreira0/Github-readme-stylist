@@ -26,9 +26,9 @@ Software Developer
   ,-.       _,---._ __  / \                                                )     (
  /  )    .-'       `./ /   \                                               =\   /=
 (  (   ,'            `/    /|  ┌ Languages ────────────────────────── ┐    )   (
- \  `-'             \'\   / |  │ Jupyter Notebook ███████░░░░░  57.0% │   /     \
-  `.              ,  \ \ /  |  │ JavaScript       ███░░░░░░░░░  24.0% │   )     (
-   /`.          ,'-`----Y   |  │ TypeScript       █░░░░░░░░░░░  11.9% │  /       \
+ \  `-'             \'\   / |  │ Jupyter Notebook ███████░░░░░  57.5% │   /     \
+  `.              ,  \ \ /  |  │ JavaScript       ███░░░░░░░░░  23.7% │   )     (
+   /`.          ,'-`----Y   |  │ TypeScript       █░░░░░░░░░░░  11.8% │  /       \
   (            ;        |   '  │ CSS              ░░░░░░░░░░░░   2.6% │  \       /
   |  ,-.    ,-'         |  /   │ Python           ░░░░░░░░░░░░   1.6% │   \__ __/
   |  | (   |            | /    └──────────────────────────────────────┘      ))
@@ -36,9 +36,9 @@ Software Developer
   `--'   `--'                                                                ((
                                                                              \)
 
-┌ Activity ──────────────────────────────── ┐  ┌ Stats ───── ┐
-│ Push PatrickBarreira0/leilao-soap-grupo-2 │  │ Commits 222 │
-│ Push PatrickBarreira0/leilao-soap-grupo-2 │  └─────────────┘
-└───────────────────────────────────────────┘
+┌ Activity ───────────────────────────────────────────────── ┐  ┌ Stats ───── ┐
+│ Create PatrickBarreira0/pucsp-ai-llm-calculadora-projeto09 │  │ Commits 223 │
+│ Push   PatrickBarreira0/leilao-soap-grupo-2                │  └─────────────┘
+└────────────────────────────────────────────────────────────┘
 ```
 <!-- END_SECTION:style -->
